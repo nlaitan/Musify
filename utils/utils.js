@@ -14,7 +14,7 @@ function checkErrors(err, res, entity, action, entityName){
                 message: 'No se ha podido ' + action + ' ' + entityName
             });                
         } else {
-            res.status(200).send({ entity });    
+            res.status(200).send({ entityName: entity });    
         }
     } 
 }
@@ -81,22 +81,7 @@ function getEntities(req,res,entity,entitiesName,sortedBy){
     var itemsPerPage = 5;
     
     entity.find().sort(sortedBy).paginate(page, itemsPerPage, function(err, entities, total){
-        if(err){
-            res.status(500).send({
-                message: 'Error en la petición'
-            });            
-        } else {
-            if(!entities){
-                res.status(404).send({
-                    message: 'No hay ' + entitiesName
-                });   
-            } else {
-                return res.status(200).send({
-                    total_items: total,
-                    entities: entities
-                });
-            }
-        }         
+        checkErrors(err, res, entities, 'listar', entitiesName);         
     });
     
 }
