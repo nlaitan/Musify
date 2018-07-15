@@ -3,33 +3,19 @@
 var path = require('path');
 var fs = require('fs');
 var mongoosePaginate = require('mongoose-pagination');
+var Utils = require('../utils/utils');
 
 var Artist = require('../models/artist');
 var Album = require('../models/album');
 var Song = require('../models/song');
 
 
-function checkErrors(err, res, action, entity, entityName){
-    if(err){
-        res.status(500).send({
-            message: 'Error al ' + action + ' ' + entityName
-        });
-    } else {
-        if(!entity){
-            res.status(404).send({
-                message: 'No se ha podido ' + action + ' ' + entityName
-            });                
-        } else {
-            res.status(200).send({ entity });    
-        }
-    } 
-}
 
 function getArtist(req,res){
     
     var artistId = req.params.id;
     Artist.findById(artistId, (err, artist) => {
-        checkErrors(err,res,'obtener',artist,'artista');
+        Utils.checkErrors(err,res,artist,'obtener','artista');
     });
     
 }
@@ -44,39 +30,13 @@ function saveArtist(req,res){
     artist.image = 'null';
     
     artist.save((err, artistStored) => {
-        checkErrors(err,res,'guardar',artistStored,'artista');
+        Utils.checkErrors(err,res,artistStored,'guardar','artista');
     })
     
 }
 
 function getArtists(req,res){
-    
-    if(req.params.page){
-        var page = req.params.page;   
-    } else {
-       var page = 1;
-    }
-        
-    var itemsPerPage = 5;
-    
-    Artist.find().sort('name').paginate(page, itemsPerPage, function(err, artists, total){
-        if(err){
-            res.status(500).send({
-                message: 'Error en la petición'
-            });            
-        } else {
-            if(!artists){
-                res.status(404).send({
-                    message: 'No hay artistas'
-                });   
-            } else {
-                return res.status(200).send({
-                    total_items: total,
-                    artists: artists
-                });
-            }
-        }         
-    });
+    Utils.getEntities(req,res,Artist,'artistas','name');
     
 }
 
@@ -85,7 +45,7 @@ function updateArtist(req,res){
     var update = req.body;
     
     Artist.findByIdAndUpdate(artistId, update, (err, artistUpdated)=>{
-        checkErrors(err,res,'actualizar',artistUpdated,'artista');        
+        Utils.checkErrors(err,res,artistUpdated,'actualizar','artista');        
     });
 }
 
@@ -145,12 +105,22 @@ function deleteArtist(req,res){
     });
 }
 
+function uploadImage(req,res){
+    Utils.uploadImage(req, res, Artist, 'artista');
+}
+
+function getImageFile(req,res){
+    Utils.getImageFile(req,res,'artists');    
+}
+
 module.exports = {
     getArtist,
     getArtists,
     saveArtist,
     updateArtist,
-    deleteArtist
+    deleteArtist,
+    uploadImage,
+    getImageFile
 };
 
 
