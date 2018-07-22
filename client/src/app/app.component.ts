@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
+import { GLOBAL } from './services/global';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +12,19 @@ import { User } from './models/user';
 export class AppComponent implements OnInit {
     public title = 'Listen';
     public user: User;
+    public user_register: User;
     public identity;
     public token;
     public errorMessage;
+    public alertRegister;
+    public successRegister;
+    public url: string;
     constructor(
         private _userService: UserService
     ) {
         this.user = new User('', '', '', '', '', 'ROLE_USER', '');
+        this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
+        this.url = GLOBAL.url;
     }
     
     ngOnInit(){
@@ -46,6 +53,7 @@ export class AppComponent implements OnInit {
                             } else {
                                 // elemento en localStorage para tener el token en sesión
                                 localStorage.setItem('token', token);
+                                this.user = new User('', '', '', '', '', 'ROLE_USER', '');
                             }
                         },
                         error => {
@@ -65,4 +73,35 @@ export class AppComponent implements OnInit {
             }
         );
     }
+    
+    logout() {
+        localStorage.removeItem('identity');
+        localStorage.removeItem('token');
+        localStorage.clear();
+        this.identity = null;
+        this.token = null;
+    }
+    
+    onSubmitRegister(){
+        console.log(this.user_register);
+        this._userService.register(this.user_register).subscribe(
+            response => {
+                let user = response['entityName'];
+                this.user_register = user;
+                if(!user._id){
+                    this.alertRegister = 'Error al registrarse';
+                } else {
+                    this.successRegister = 'El registro se ha realizado correctamente,                     inicie sesión con: ' + this.user_register.email;
+                    this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
+                }
+            },
+            error => {
+                if(error != null){
+                    this.alertRegister = error.error.message;
+                    console.log(error);
+                }
+            }
+        );
+    }
+    
 }

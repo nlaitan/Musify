@@ -1,1 +1,100 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+body{
+    background-color: #191919FF;
+}
+
+.brand-logo {
+    height: 64px;
+}
+
+.infoNav {
+    height: 30px;
+    line-height: 30px;
+}
+
+.logo {
+    padding-left: 15px; 
+    padding-right: 20px; 
+    margin-top: 14px
+}
+
+h3 {
+	color: #FAFAFA;
+}
+
+h4 {
+	color: #FAFAFA;
+}
+
+h5 {
+	color: #FAFAFA;
+}
+
+input {
+	color: #ffffff;
+}
+
+@media all and (min-width: 600px) {
+    .nav-wrapper a {
+        margin-top: 5px;
+        margin-left: 5px;    
+    }
+}
+
+@media all and (max-width: 600px) {
+    .nav-wrapper a {
+        margin-top: 2px;
+    }
+}
+
+header, main, footer, body {
+    padding-left: 250px;
+}
+
+@media only screen and (max-width : 992px) {
+    header, main, footer, body {
+        padding-left: 0;
+    }
+}
+
+.sidenav {
+    width: 250px;
+}
+
+.sidenav .fa{
+    font-size: 18px;
+    margin-right: 2px;
+}
+
+.sidenav .user-view{
+    padding-top: 14px;
+}
+
+.file-field .fa {
+    font-size: 20px;
+}
+
+.avatar{
+    width: 100%;
+    height: auto;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+ }
+ .landscape .avatar{ 
+    width: auto;
+    height: 100%;
+ }
+ .potrait .avatar{ 
+    width: 100%;
+    height: auto;
+ }
+ .image_cover{ 
+    width:70px; 
+    height:70px; 
+    border-radius:100%; 
+    overflow:hidden;  
+    margin: 7px 0 0 5px;
+ }

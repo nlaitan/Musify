@@ -53,6 +53,7 @@ function uploadImage(req,res,entity,entityName){
             message: 'No has subido ninguna imagen'
         });      
     }
+    console.log();
     
 }
 

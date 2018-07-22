@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <h4 class="center-align"> {{ titulo }} </h4>
+
+        <form #userUpdateForm="ngForm" (ngSubmit)="onSubmit()" 
+        class="" ngNativeValidate>
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div id="card-alert" class="card red darken-4" *ngIf="alertUpdate" >
+                        <div class="card-content red-text text-lighten-4 valign-wrapper">
+                            <p>{{ alertUpdate }}</p>    
+                        </div>
+                    </div>
+
+                    <div class="card horizontal green darken-4" *ngIf="successUpdate">
+                        <span class="card-content green-text text-lighten-4 center-block">
+                            <em>{{successUpdate}}</em>    
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="form-group col s12 m6 l4 offset-l2">
+                    <div class="input-field">
+                        <input #name="ngModel" [(ngModel)]="user.name" name="name" type="text" class="form-control validate" id="name" required />
+                        <label class="active" for="name">Nombre</label>
+                        <span class="helper-text" data-error="El nombre es obligatorio" data-success=""></span>
+                    </div>
+
+                    <div class="input-field">
+                        <input #lastname="ngModel" [(ngModel)]="user.lastname" name="lastname" type="text" class="form-control validate" id="lastname" required />
+                        <label class="active" for="lastname">Apellido</label>
+                        <span class="helper-text" data-error="El apellido es obligatorio" data-success=""></span>
+                    </div>
+
+                    <div class="input-field">
+                        <input #email="ngModel" [(ngModel)]="user.email" name="email" type="email" class="form-control validate" id="email" required />
+                        <label class="active" for="email">Email</label>
+                        <span class="helper-text" data-error="El email no es válido"                       data-success="El email es válido"></span>
+                    </div>
+                </div>
+
+                <!-- IMAGEN -->
+                <div class="form-group col s12 m6 l4">
+                    <div class="file-field input-field">
+                        <div class="btn-small grey darken-3">
+                            <i class="fa fa-folder-open"></i>
+                            <input name="image" type="file" class="form-control validate" id="image" 
+                            (change)="fileChangeEvent($event)" />    
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Elige una imagen">
+                        </div>
+                    </div>
+
+                    <div class="image_for_edit" *ngIf="user.image && user.image != 'null'">
+                        <img  src="{{url + 'get-image-user/' + user.image}}" width="150" class="materialboxed center-block" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row"> 
+                <button class="waves-effect waves-light btn purple darken-3 col s12 m6 l4 push-m3 push-l4 z-depth-3" type="submit">Guardar cambios</button>
+            </div>
+        </form>
+        <br/>
+    </div>
+</div>

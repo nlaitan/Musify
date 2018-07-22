@@ -36,7 +36,7 @@ function saveUser(req,res){
                     Utils.checkErrors(err,res,userStored,'guardar','usuario');
                 });
             } else {
-                res.status(200).send({
+                res.status(404).send({
                     message: 'Complete todos los campos'
                 }); 
             }
@@ -46,13 +46,11 @@ function saveUser(req,res){
             message: 'Introduce la contraseña'
         });
     }
-    
-    
+     
 }
 
 function loginUser(req,res){
     var params = req.body;
-    
     var email = params.email;
     var password = params.password;
     
@@ -93,6 +91,12 @@ function updateUser(req,res){
     var userId = req.params.id;
     var update = req.body;
     
+    if(userId != req.user.sub){
+        return res.status(500).send({
+            message: 'No tienes permiso para editar este usuario'
+        });
+    }
+    
     User.findByIdAndUpdate(userId, update, (err, userUpdated)=>{
         Utils.checkErrors(err,res,userUpdated,'actualizar','usuario');        
     });
@@ -114,6 +118,4 @@ module.exports = {
     uploadImage,
     getImageFile
 };
-
-
 

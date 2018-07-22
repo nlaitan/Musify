@@ -22,10 +22,13 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.css"
+            "styles": [   
+                "src/assets/css/materialize.min.css",
+                "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+                "src/app/views/utils.js"
+            ],
           },
           "configurations": {
             "production": {
