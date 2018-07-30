@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
 import { GLOBAL } from './services/global';
+import { Router, ActivatedRoute, Params} from '@angular/router';
+//import { Http } from '@angular/http';
+import  { MatSnackBar } from '@angular/material';
+
 
 @Component({
   selector: 'app-root',
@@ -10,6 +14,7 @@ import { GLOBAL } from './services/global';
 })
 
 export class AppComponent implements OnInit {
+    public shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
     public title = 'Listen';
     public user: User;
     public user_register: User;
@@ -19,8 +24,12 @@ export class AppComponent implements OnInit {
     public alertRegister;
     public successRegister;
     public url: string;
+    public closed: boolean;
     constructor(
-        private _userService: UserService
+        private _route: ActivatedRoute,
+        private _router: Router,
+        private _userService: UserService,
+        public snackBar: MatSnackBar
     ) {
         this.user = new User('', '', '', '', '', 'ROLE_USER', '');
         this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
@@ -30,8 +39,17 @@ export class AppComponent implements OnInit {
     ngOnInit(){
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
+        this.closed = true;
     }
     
+    yesClosed() {
+        this.closed = true;
+    }
+
+    noClosed() {
+        this.closed = false;
+    }
+
     public onSubmit() {
         // Conseguir los datos del usuario
         this._userService.signup(this.user).subscribe(
@@ -54,12 +72,13 @@ export class AppComponent implements OnInit {
                                 // elemento en localStorage para tener el token en sesión
                                 localStorage.setItem('token', token);
                                 this.user = new User('', '', '', '', '', 'ROLE_USER', '');
+                                this.openSnackBar('Usuario logueado', '', 'green-snackbar');
+                                this.roundAvatar();
                             }
                         },
                         error => {
                             if(error != null){
                                 this.errorMessage = error.error.message;
-                                console.log(error);
                             }
                         }
                     );
@@ -80,6 +99,7 @@ export class AppComponent implements OnInit {
         localStorage.clear();
         this.identity = null;
         this.token = null;
+        this._router.navigate(['/']);
     }
     
     onSubmitRegister(){
@@ -104,4 +124,34 @@ export class AppComponent implements OnInit {
         );
     }
     
+    openSnackBar(message: string, action: string, classPanel: string) {
+        this.snackBar.open(message, action, {
+            duration: 1000,
+            panelClass: [ classPanel ]
+        });
+    }
+
+    isLargeScreen() {
+        const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        if (width > 720) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    roundAvatar() {
+        var img = document.getElementById("image_cover");        
+        var imageWidth = img.clientWidth;
+        var imageHeight = img.clientHeight;
+        if(imageWidth > imageHeight){
+            document.getElementById("image_cover").style.width = 'auto';
+            document.getElementById("image_cover").style.height = '100%';
+        }else{
+            document.getElementById("image_cover").style.width = '100%';
+            document.getElementById("image_cover").style.height = 'auto';
+        }
+    };
+    
+
 }

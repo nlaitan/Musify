@@ -1,18 +1,23 @@
 // Inicializaciones
-$(document).ready(function(){
-    $('.sidenav').sidenav();
-    $(".dropdown-trigger").dropdown();
-    M.updateTextFields();
-    $('.materialboxed').materialbox();
+$(function(){
+    /*
+	    $(".dropdown-trigger").dropdown();
+	    M.updateTextFields();
+	    $('.materialboxed').materialbox();
+    */
+    M.AutoInit();
     // Redondear y rellenar imagen de usuario
-    $('.image_cover').each(function(){
+    roundImage();
+});
+
+function roundImage(){
+	$('.image_cover').each(function(){
 		var imageWidth = $(this).find('img').width();
-		var imageheight = $(this).find('img'). height();
-		if(imageWidth > imageheight){
+		var imageHeight = $(this).find('img'). height();
+		if(imageWidth > imageHeight){
 			$(this).addClass('landscape');
 		}else{
 			$(this).addClass('potrait');
 		}
 	});
-
-});
+}

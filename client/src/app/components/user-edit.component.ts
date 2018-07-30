@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService} from '../services/user.service';
 import { GLOBAL } from '../services/global';
 import { User } from '../models/user';
+import { MatSnackBar } from '@angular/material';
+import { AppComponent } from '../app.component';
+
 
 @Component({
     selector: 'user-edit',
@@ -20,7 +23,8 @@ export class UserEditComponent implements OnInit{
     public url: string;
     
     constructor(
-        private _userService: UserService
+        private _userService: UserService,
+        public app: AppComponent
     ){
         this.titulo = 'Actualizar mis datos';
         this.identity = this._userService.getIdentity();
@@ -52,15 +56,17 @@ export class UserEditComponent implements OnInit{
                                 localStorage.setItem('identity', JSON.stringify(this.user));
                                 console.log(this.user);
                                 let image_path = this.url + 'get-image-user/' + this.user.image;
-                                document.getElementById("image-logged").setAttribute('src', image_path);
+                                document.getElementById("image_cover").setAttribute('src', image_path);
                             });        
                     }
-                    this.successUpdate = 'Datos actualizados correctamente';
+                    this.app.openSnackBar('Datos guardados correctamente', '', 'green-snackbar');
+                    this.app.roundAvatar();
                 }
             },
             error => {
                 if(error != null){
-                    this.alertUpdate = error.error.message;
+                    let errorMessage = error.error.message;
+                    this.app.openSnackBar(errorMessage, '', 'red-snackbar');
                 }
             }
         );

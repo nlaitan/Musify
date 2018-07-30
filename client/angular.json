@@ -22,13 +22,14 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [   
-                "src/assets/css/materialize.min.css",
-                "src/styles.css"
+            "styles": [
+              "src/assets/scss/styles.scss"
             ],
             "scripts": [
-                "src/app/views/utils.js"
-            ],
+              "src/assets/js/jquery-3.3.1.min.js",
+              "src/assets/js/materialize.min.js",
+              "src/app/views/utils.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -126,5 +127,10 @@
       }
     }
   },
-  "defaultProject": "client"
+  "defaultProject": "client",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

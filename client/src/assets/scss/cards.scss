@@ -1,0 +1,73 @@
+.card.horizontal {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  border-left: 4px solid $background-color;
+  background-color: darken( $background-color-dark, 3% );
+  .card-image {
+    margin-left: 10px;
+    img {
+      object-fit: cover;
+      min-height: 140px;
+      max-height: 180px;
+      width: auto;
+    }
+  }
+  .card-stacked {
+    .card-content {
+      padding: 15px 5px 0 15px;
+      .card-title {
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+.mat-card {
+  font-family: "Montserrat", sans-serif;
+  background-color: lighten($background-color-dark,5%);
+  text-align: center;
+  justify-content: center;
+  .mat-card-actions {
+    button{
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+    .panel-confirmacion {
+      margin-top: -60px;
+      padding-bottom: 7px;
+      margin-left: 10px;
+      position: absolute;
+      background-color: $background-color-dark;
+    }
+  }
+}
+
+mat-card {
+  padding: 10px 8px 6px 8px;
+  mat-card-title span {
+    font-size: 20px;
+  }
+  .image-artist {
+    height: 200px;
+    object-fit: cover;
+  }
+}
+
+.card {
+  .card-image img {
+    object-fit: cover;
+  }
+  .card-content {
+    background-color: darken($background-color-dark,2%);
+    border-radius: 0;
+    padding: 15px 0 5px 0;
+    .card-title {
+      a:hover {
+        color: $primary-color;
+        border-bottom: 1px solid $primary-color;
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@
 
 var express = require('express');
 var ArtistController = require('../controllers/artist');
+
 var api = express.Router();
 var md_auth = require('../middlewares/authenticated');
 

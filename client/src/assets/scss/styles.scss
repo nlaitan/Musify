@@ -1,0 +1,128 @@
+// Materialize sass
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+
+// Materialize
+@import "componentes";
+
+// Estilos propios
+@import "mixins";
+@import "signin";
+@import "colores";
+@import "menus";
+@import "avatar";
+@import "cards";
+@import "forms";
+
+html {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  background-color: $background-color-dark;
+}
+
+a, input, h3, h4, h5, textarea {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+	color: $text-color;
+}
+
+header, main, footer {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+.primary {
+	background-color: $primary-color-dark;
+}
+
+.logo {
+  padding-left: 15px; 
+  padding-right: 20px; 
+  margin-top: 14px
+} 
+
+.file-field .fa {
+    font-size: 20px;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.seven-width {
+  width: 75%;
+}
+
+.green-snackbar {
+    background-color: $success-color;
+    color: $success-color-light;
+    .mat-simple-snackbar{
+    	justify-content: center;
+	}    
+}
+
+.red-snackbar {
+    background-color: $error-color;
+    color: $error-color-light;
+    .mat-simple-snackbar{
+      justify-content: center;
+  }    
+}
+
+.yellow-snackbar {
+    background-color: $alert-color;
+    color: $background-color-dark;
+    .mat-simple-snackbar{
+      justify-content: center;
+  }    
+}
+
+.transparent {
+    background-color: transparent;
+}
+
+.principal {
+  background-color: transparent;
+	.main-content { 
+		.flotante {
+		    margin: 100px;
+		    float: left; 
+		}
+	}
+}
+
+button.flotante {
+  margin: 10px;
+}
+
+button.mat-mini-fab.mat-accent {
+  background-color: $primary-color;
+  color: $text-color;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.row {
+  .entity-card {
+    width: 100%;
+    height: auto;
+    margin: 5px 0px 5px 0px;
+  }
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+

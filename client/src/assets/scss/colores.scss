@@ -1,0 +1,46 @@
+// Colores secundarios
+$secondary-color: color('deep-purple', 'darken-3');
+$secondary-color-light: lighten($secondary-color, 15%);
+$secondary-color-dark: darken($secondary-color, 20%);
+
+// Colores de fondo
+$background-color: color('grey', 'darken-3');
+$background-color-light: lighten($background-color, 15%);
+$background-color-dark: darken($background-color, 18%);
+
+// Colores alertas
+$success-color: color('green', 'darken-4');
+$success-color-light: lighten($success-color, 60%);
+$error-color: color('red', 'darken-3');
+$error-color-light: lighten($error-color, 60%);
+$alert-color: color('yellow', 'darken-1');
+$alert-color-light: lighten($alert-color, 60%);
+
+// Color texto
+$text-color: color('grey', 'lighten-5');
+
+
+// Clases de colores
+.primary-color{
+	background-color: $primary-color;
+}
+
+.secondary-color {
+	background-color: $secondary-color;
+}
+
+.background-color {
+	background-color: $background-color;
+}
+
+.background-color-dark {
+	background-color: $background-color-dark;
+}
+
+.success-color {
+	background-color: $success-color;
+}
+
+.error-color {
+	background-color: $error-color;
+}

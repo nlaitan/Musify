@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/purple-green.css';
 
 
 body{
@@ -50,22 +51,13 @@ input {
 }
 
 header, main, footer, body {
-    padding-left: 250px;
+    padding-left: 0px;
 }
 
 @media only screen and (max-width : 992px) {
     header, main, footer, body {
         padding-left: 0;
     }
-}
-
-.sidenav {
-    width: 250px;
-}
-
-.sidenav .fa{
-    font-size: 18px;
-    margin-right: 2px;
 }
 
 .sidenav .user-view{
@@ -83,18 +75,117 @@ header, main, footer, body {
     -moz-background-clip: padding;
     background-clip: padding-box;
  }
+
  .landscape .avatar{ 
     width: auto;
     height: 100%;
  }
+
  .potrait .avatar{ 
     width: 100%;
     height: auto;
  }
+
  .image_cover{ 
     width:70px; 
     height:70px; 
     border-radius:100%; 
     overflow:hidden;  
     margin: 7px 0 0 5px;
+    border: 3px solid #101010FF;
  }
+
+ .formulario {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.seven-width {
+  width: 75%;
+}
+
+.green-snackbar {
+    background-color: #00550BFF;
+    color: #BDFFBFFF;    
+}
+
+.green-snackbar .mat-simple-snackbar{
+    justify-content: center;
+}
+
+.sidenav {
+    width: 250px;
+    background-color: #111111FF;
+}
+
+.transparent {
+    background-color: transparent;
+}
+
+.principal .main-content .flotante {
+    margin-top: 20px;
+    float: left; 
+}
+
+button.flotante  {
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+.avatar{
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+ }
+
+ .landscape .avatar{ 
+    width: auto;
+    height: 100%;
+ }
+
+ .potrait .avatar{ 
+    width: 100%;
+    height: auto;
+ }
+
+ .image_cover{ 
+    width:50px; 
+    height:50px; 
+    border-radius:50%; 
+    overflow:hidden;  
+    float: left;
+    margin-right: 10px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+mat-card-title span {
+    font-size: 20px;
+}
+
+.sidenav mat-card {
+    background-color: #30083B
+}
+
+.principal {
+    background-color: transparent;
+}
+
+mat-card.mat-card {
+    padding: 10px 8px 6px 8px;
+}

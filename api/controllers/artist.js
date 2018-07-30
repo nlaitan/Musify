@@ -35,9 +35,27 @@ function saveArtist(req,res){
     
 }
 
-function getArtists(req,res){
-    Utils.getEntities(req,res,Artist,'artistas','name');
-    
+function getArtists(req, res){
+    if(req.params.page){
+        var page = req.params.page;
+    }else{
+        var page = 1;
+    }
+    var itemsPerPage = 4;
+    Artist.find().sort('name').paginate(page, itemsPerPage, function(err, artists, total){
+        if(err){
+            res.status(500).send({message: 'Error en la petición.'});
+        }else{
+            if(!artists){
+                res.status(404).send({message: 'No hay artistas!'});
+            }else{
+                return res.status(200).send({
+                    total_items: total,
+                    artists: artists
+                });
+            }
+        }
+    });
 }
 
 function updateArtist(req,res){

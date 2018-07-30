@@ -1,0 +1,70 @@
+<div *ngIf="identity && identity.role == 'ROLE_ADMIN'">
+
+    <h4 class="centrar"> {{ titulo }} </h4>
+
+
+    <form #formArtist="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate >
+             
+        <div class="row centrar">       
+
+            <div class="col s12 m6 l4 offset-m3 offset-l4">            
+                
+                <div class="input-field" >
+                    <label class="active" for="name">Nombre</label>
+                    <input #name="ngModel" [(ngModel)]="artist.name" name="name" type="text" 
+                    class="validate" id="name" required placeholder="Nombre" />
+                    <span class="helper-text" data-error="El nombre es obligatorio"></span>
+                </div>
+                
+                <div class="input-field">
+                    <label class="active" for="description">Descripción</label>
+                    <textarea id="description" #description="ngModel" class="materialize-textarea" 
+                    [(ngModel)]="artist.description" name="description" placeholder="Descripción"></textarea>
+                </div>
+            
+                
+    	        <div *ngIf="is_edit">
+    	       
+                    <div class="file-field input-field">
+    	                <div class="btn-small grey darken-3">
+    	                    <i class="material-icons">folder</i>
+    	                    <input name="image" type="file" class="form-control" id="image" 
+    	                    (change)="fileChangeEvent($event)" />    
+    	                </div>
+    	                <div class="file-path-wrapper">
+    	                    <input class="file-path" type="text" placeholder="Elige una imagen">
+    	                </div>
+    	            </div>
+
+    	            <div class="image_for_edit" *ngIf="artist.image && artist.image != 'null'">
+    	                <img  src="{{url + 'get-image-artist/' + artist.image}}" width="200" class="materialboxed center-block" materialize="materialbox" />
+    	            </div>
+    	        </div>
+
+            </div>
+        	
+
+        </div>
+
+        <div class="row centrar">
+            <div class="col-md-2">    
+                <button mat-flat-button type="submit" [disabled]="!formArtist.form.valid" >
+                	<div *ngIf="!is_edit">
+                		Crear artista
+                	</div>
+                	<div *ngIf="is_edit">
+                		Editar artista
+                	</div>
+                </button>
+            </div>
+        </div>
+            
+    </form>
+
+</div>
+
+
+<div *ngIf="!identity || identity.role != 'ROLE_ADMIN'">
+    <h2>Error</h2>
+    <p>Acceso denegado</p>
+</div>

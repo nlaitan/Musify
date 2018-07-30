@@ -1,0 +1,45 @@
+.formulario {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.input-field.with-icon {
+  position: relative;
+  width: 80%;
+  input {
+    padding-left: 35px;
+    &:focus {
+      border-right: 2px solid $secondary-color;
+      border-radius: 6px;
+      font-size: 18px;
+    }
+  }
+  i.myform {
+    position: absolute;
+    margin-left: 3px;
+    top: 10px;
+    color: $background-color;
+    &:hover {
+      color: $background-color-light;
+    }
+  }
+}
+
+.input-field {
+  input, textarea {
+    &:focus {
+      border-right: 2px solid $secondary-color;
+      border-radius: 6px;
+      font-size: 18px;
+    } 
+  }
+  .search-nav {
+    &:focus {
+      border-right: 2px solid $secondary-color;
+      border-radius: 0px;
+      font-size: 18px;
+    }
+  }  
+}

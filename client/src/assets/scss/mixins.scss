@@ -1,0 +1,5 @@
+@mixin background-clip($arg) {
+	-webkit-background-clip: $arg;
+	-moz-background-clip: padding;
+	background-clip: $arg;
+}
