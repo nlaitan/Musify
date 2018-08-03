@@ -59,9 +59,15 @@
        
         <nav class="grey darken-4">
             <div class="nav-wrapper">
+                
                 <a [routerLink]="['/']" class="brand-logo purple-text text-lighten-1">
                     <img src="./assets/img/music-playerx64.png" width="50">
                 </a>
+                
+                <button [style]="getButtonStyle()" color="primary" *ngIf="closed" mat-raised-button (click)="sidenav.open()" > 
+                    Abrir menú
+                </button>
+
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
                         <nav class="grey darken-3 z-depth-0">
@@ -80,13 +86,10 @@
             </div>
         </nav>
 
-        <button color="primary" *ngIf="closed" class="flotante" mat-fab (click)="sidenav.open()" > 
-            <mat-icon>menu</mat-icon>
-        </button>
-
         <!-- PAGINA -->
-        <div style="margin-left: 10px;">
+        <div>
             <router-outlet></router-outlet>
+            <player *ngIf="identity"></player>
         </div>
         
     </mat-sidenav-content>

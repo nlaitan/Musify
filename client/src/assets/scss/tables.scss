@@ -1,0 +1,50 @@
+table {
+	tbody {
+		&:hover {
+			background-color: $background-color-very-dark;
+			border-left: 2px solid $primary-color-dark;
+		}
+		tr {
+			line-height: 1.1;
+			td {
+				&.button_play {
+					&:hover {
+						background-color: darken($background-color-very-dark, 1%);
+						a { 
+							mat-icon {
+								color: $primary-color-light;
+							}
+						}
+					}
+				}
+				padding: 6px;
+				a {
+					cursor: pointer;
+					mat-icon {
+						margin-left: 4px;
+						margin-right: 4px;
+						&:hover {
+							font-size: 27px;
+						}
+					}
+				}
+				.panel-confirmacion-cancion {
+					margin-top: -40px;
+					margin-left: -10px;
+					position: absolute;
+					float: right;
+					text-align: center;
+					background-color: $background-color-very-dark;
+					button {
+						border-top: 1px solid $background-color;
+						border-radius: 0;
+						&:hover {
+							background-color: black;
+							border-bottom: 1px solid $background-color;
+						}
+					}
+				}
+			}
+		}	
+	}
+}

@@ -1,0 +1,103 @@
+vg-player {
+	height: 50px;
+	border-left: 4px solid $primary-color;
+	vg-controls{
+		background-color: $background-color-very-dark;
+		vg-play-pause {
+			background-color: darken($background-color-very-dark, 1%);
+			border-right: 1px solid $background-color-dark;
+		}
+		vg-scrub-bar-current-time {
+			.background {
+				background-color: $primary-color;
+				border: 1px solid $primary-color;
+			}
+			.slider {
+				background-color: $primary-color;
+				border-radius: 10px;
+				width: 4px;
+				margin-left: -2px;
+				z-index: 200;
+			}
+		}
+	}
+}
+
+.player {
+	background-color: $background-color-very-dark;
+	position: fixed;
+	width: 100%;
+	height: 80px;
+	bottom: 0;
+	display: flex;
+	z-index: 10;
+	img {
+		height: 80px;
+		overflow: hidden;
+	}
+	.song-info {
+		height: 19px; 
+		position: fixed;
+		border-bottom: 1px solid $background-color; 
+		margin-left: 80px; 
+		width: 100%; 
+		background-color: lighten($background-color-very-dark,2%);
+		label {
+			margin-left: 5px; 
+			font-size: 14px;
+			color: white;
+		}
+	}
+	vg-player.player-principal {
+		height: 60px;
+		bottom: -20px;
+		border: 0;
+		vg-controls{
+			background-color: $background-color-very-dark;
+			position: relative;
+			height: 60px;
+			padding-right: 7px;
+			vg-play-pause {
+				background-color: darken($background-color-very-dark, 1%);
+				border-right: 1px solid $background-color;
+				border-left: 1px solid $background-color;
+				width: 60px;
+				height: 60px;
+				&:hover {
+					background-color: darken($background-color-very-dark, 3%);
+				}
+			}
+			vg-time-display { 
+				height: 60px;
+				span {
+					margin-top: 5px;
+				}
+			}
+			vg-scrub-bar {
+				height: 60px;
+				vg-scrub-bar-current-time {
+					.background {
+						background-color: $primary-color;
+						border: 1px solid $primary-color;
+					}
+					.slider {
+						background-color: $primary-color;
+						border-radius: 0;
+						width: 10px;
+						height: 24px;
+						margin-left: -5px;
+						margin-top: -9px;
+						z-index: 200;
+					}
+				}
+			}
+			vg-volume {
+				height: 60px;
+			}
+			vg-mute {
+				height: 60px;
+				margin-right: 5px;
+			}
+		}
+	}
+}

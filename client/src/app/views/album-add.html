@@ -1,64 +1,66 @@
-<h4 class="center-align"> {{ titulo }} </h4>
-<br>
-<form #formAlbum="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
-	
-	<div class="row">
+<div class="componente-principal-actual">
+	<h4 class="center-align"> {{ titulo }} </h4>
+	<br>
+	<form #formAlbum="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
 		
-		<div class="col l4 s12 offset-l2">
-			<div class="input-field" >
-		        <label class="active" for="title">Titulo</label>
-		        <input #title="ngModel" [(ngModel)]="album.title" name="title" type="text" 
-		        class="validate" id="title" required placeholder="Título" />
-		        <span class="helper-text" data-error="El título es obligatorio"></span>
-		    </div>
-		    
-		    <div class="input-field">
-		        <label class="active" for="description">Descripción</label>
-		        <textarea id="description" #description="ngModel" placeholder="Descripción" 
-		        name="description" class="materialize-textarea validate" required 
-		        [(ngModel)]="album.description"  >
-		        </textarea>
-		        <span class="helper-text" data-error="La descripción es obligatoria"></span>
-		    </div>
+		<div class="row">
+			
+			<div class="col l4 s12 offset-l2">
+				<div class="input-field" >
+			        <label class="active" for="title">Titulo</label>
+			        <input #title="ngModel" [(ngModel)]="album.title" name="title" type="text" 
+			        class="validate" id="title" required placeholder="Título" />
+			        <span class="helper-text" data-error="El título es obligatorio"></span>
+			    </div>
+			    
+			    <div class="input-field">
+			        <label class="active" for="description">Descripción</label>
+			        <textarea id="description" #description="ngModel" placeholder="Descripción" 
+			        name="description" class="materialize-textarea validate" required 
+			        [(ngModel)]="album.description"  >
+			        </textarea>
+			        <span class="helper-text" data-error="La descripción es obligatoria"></span>
+			    </div>
 
-		    <div class="input-field">
-		        <label class="active" for="year">Año</label>
-		        <input id="year" #year="ngModel" class="validate" name="year"
-		        [(ngModel)]="album.year" type="text" required placeholder="Año" />
-		        <span class="helper-text" data-error="El año es obligatorio"></span>
+			    <div class="input-field">
+			        <label class="active" for="year">Año</label>
+			        <input id="year" #year="ngModel" class="validate" name="year"
+			        [(ngModel)]="album.year" type="text" required placeholder="Año" />
+			        <span class="helper-text" data-error="El año es obligatorio"></span>
+			    </div>
+			</div>
+		
+		    <div *ngIf="is_edit" class="col l4 s12 center-align">
+		        <div class="file-field input-field">
+		            <div class="btn-small grey darken-3">
+		                <i class="material-icons">folder</i>
+		                <input name="image" type="file" class="form-control" id="image" 
+		                (change)="fileChangeEvent($event)" />    
+		            </div>
+		            <div class="file-path-wrapper">
+		                <input class="file-path" type="text" placeholder="Elige una imagen">
+		            </div>
+		        </div>
+
+		        <div class="image_for_edit" *ngIf="album.image && album.image != 'null'">
+		            <img  src="{{url + 'get-image-album/' + album.image}}" width="200" class="materialboxed center-block" materialize="materialbox" />
+		        </div>
 		    </div>
 		</div>
-	
-	    <div *ngIf="is_edit" class="col l4 s12 center-align">
-	        <div class="file-field input-field">
-	            <div class="btn-small grey darken-3">
-	                <i class="material-icons">folder</i>
-	                <input name="image" type="file" class="form-control" id="image" 
-	                (change)="fileChangeEvent($event)" />    
-	            </div>
-	            <div class="file-path-wrapper">
-	                <input class="file-path" type="text" placeholder="Elige una imagen">
-	            </div>
-	        </div>
 
-	        <div class="image_for_edit" *ngIf="album.image && album.image != 'null'">
-	            <img  src="{{url + 'get-image-album/' + album.image}}" width="200" class="materialboxed center-block" materialize="materialbox" />
-	        </div>
-	    </div>
-	</div>
+	    
 
-    
+	    <div class="row center-align">
+	    	<button mat-raised-button color="primary" value="{{titulo}}" type="submit" 
+	    	[disabled]="!formAlbum.form.valid" >
+	    		<div *ngIf="!is_edit">
+	        		Crear álbum
+	        	</div>
+	        	<div *ngIf="is_edit">
+	        		Editar álbum
+	        	</div>
+	    	</button>
+		</div>
 
-    <div class="row center-align">
-    	<button mat-raised-button color="primary" value="{{titulo}}" type="submit" 
-    	[disabled]="!formAlbum.form.valid" >
-    		<div *ngIf="!is_edit">
-        		Crear álbum
-        	</div>
-        	<div *ngIf="is_edit">
-        		Editar álbum
-        	</div>
-    	</button>
-	</div>
-
-</form>
+	</form>
+</div>

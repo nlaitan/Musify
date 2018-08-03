@@ -3,8 +3,10 @@ import { UserService } from './services/user.service';
 import { User } from './models/user';
 import { GLOBAL } from './services/global';
 import { Router, ActivatedRoute, Params} from '@angular/router';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 //import { Http } from '@angular/http';
 import  { MatSnackBar } from '@angular/material';
+declare let $: any;
 
 
 @Component({
@@ -25,15 +27,19 @@ export class AppComponent implements OnInit {
     public successRegister;
     public url: string;
     public closed: boolean;
+    public recalcular: boolean;
+
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
         private _userService: UserService,
-        public snackBar: MatSnackBar
+        public snackBar: MatSnackBar,
+        private _sanitizer: DomSanitizer
     ) {
         this.user = new User('', '', '', '', '', 'ROLE_USER', '');
         this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
         this.url = GLOBAL.url;
+        this.recalcular = true;
     }
     
     ngOnInit(){
@@ -44,6 +50,10 @@ export class AppComponent implements OnInit {
     
     yesClosed() {
         this.closed = true;
+    }
+
+    isSidenavClosed(){
+        return this.closed;
     }
 
     noClosed() {
@@ -138,6 +148,23 @@ export class AppComponent implements OnInit {
         } else {
             return false;
         }
+    }
+
+    isExtraLargeScreen() {
+        const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        if (width > 1000) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    getButtonStyle(){
+       if(this.isExtraLargeScreen()){
+           return this._sanitizer.bypassSecurityTrustStyle(`margin-left: 65px;`);    
+       } else {
+           return this._sanitizer.bypassSecurityTrustStyle(`margin-left: 10px;`);  
+       }
     }
 
     roundAvatar() {

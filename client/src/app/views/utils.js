@@ -6,6 +6,7 @@ $(function(){
 	    $('.materialboxed').materialbox();
     */
     M.AutoInit();
+
     // Redondear y rellenar imagen de usuario
     roundImage();
 });

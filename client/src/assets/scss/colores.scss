@@ -7,6 +7,7 @@ $secondary-color-dark: darken($secondary-color, 20%);
 $background-color: color('grey', 'darken-3');
 $background-color-light: lighten($background-color, 15%);
 $background-color-dark: darken($background-color, 18%);
+$background-color-very-dark: darken($background-color, 22%);
 
 // Colores alertas
 $success-color: color('green', 'darken-4');

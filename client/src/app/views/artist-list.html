@@ -1,54 +1,56 @@
-<div class="head-page" *ngIf="identity">
-	<h4>{{ titulo }}</h4>
-	<a [routerLink]="['/crear-artista']" href="#" *ngIf="identity.role == 'ROLE_ADMIN'" mat-flat-button>Añadir Artista</a>
+<div class="componente-principal-actual">
+	<div class="head-page" *ngIf="identity">
+		<h4>{{ titulo }}</h4>
+		<a [routerLink]="['/crear-artista']" href="#" *ngIf="identity.role == 'ROLE_ADMIN'" mat-flat-button>Añadir Artista</a>
 
-</div>
+		<div class="pagination right">
+			<li class="waves-effect">
+				<a [routerLink]="['/artistas', prev_page]"><mat-icon>chevron_left</mat-icon></a>
+			</li>
+			<li class="waves-effect">
+				<a [routerLink]="['/artistas', next_page]"><mat-icon>chevron_right</mat-icon></a>
+			</li>
+		</div>
+	</div>
 
-<div *ngIf="identity" class="row">
-	<div class="col xl3 l3 m4 s8 offset-s2 entity-card" *ngFor="let artist of artists">
-		<mat-card>
-			<mat-card-title>
-				<a [routerLink]="['/artista', artist._id]">
-					{{ artist.name }}
-				</a>
-			</mat-card-title>
-			<img *ngIf="artist.image != 'null'" mat-card-image class="image-artist" src="{{url + 'get-image-artist/' + artist.image}}">
-			<mat-card-content>
-				{{ artist.description }}
-			</mat-card-content>
-			<mat-card-actions>
-			    <button mat-mini-fab [routerLink]="['/editar-artista', artist._id]" *ngIf="identity.role =='ROLE_ADMIN'">
-			    	<mat-icon aria-label="Editar">edit</mat-icon>
-				</button>
-			    
-			    <button mat-mini-fab (click)="onDeleteConfirm(artist._id)" color="warn" *ngIf="identity.role =='ROLE_ADMIN'">
-			    	<mat-icon aria-label="Eliminar">delete</mat-icon>
-				</button>
-				<div class="panel-confirmacion" *ngIf="confirmado == artist._id">
-					<label>¿Está seguro?</label>
-					<div>
-						<button mat-stroked-button color="primary" *ngIf="identity.role =='ROLE_ADMIN'" 
-						(click)="onDeleteArtist(artist._id)">
-					    	Confirmar
-						</button>
-						<button mat-stroked-button *ngIf="identity.role =='ROLE_ADMIN'" 
-						(click)="onCancelArtist()">
-					    	Cancelar
-						</button>
-					</div>	
-				</div>
+	<div *ngIf="identity" class="row">
+		<div class="col xl3 l3 m4 s10 offset-s1 entity-card" *ngFor="let artist of artists">
+			<mat-card>
+				<mat-card-title>
+					<a [routerLink]="['/artista', artist._id]">
+						{{ artist.name }}
+					</a>
+				</mat-card-title>
+				<img *ngIf="artist.image != 'null'" mat-card-image class="image-artist" src="{{url + 'get-image-artist/' + artist.image}}">
+				<mat-card-content>
+					{{ artist.description }}
+				</mat-card-content>
+				<mat-card-actions>
+				    <button mat-mini-fab [routerLink]="['/editar-artista', artist._id]" *ngIf="identity.role =='ROLE_ADMIN'">
+				    	<mat-icon aria-label="Editar">edit</mat-icon>
+					</button>
+				    
+				    <button mat-mini-fab (click)="onDeleteConfirm(artist._id)" color="warn" *ngIf="identity.role =='ROLE_ADMIN'">
+				    	<mat-icon aria-label="Eliminar">delete</mat-icon>
+					</button>
+					<div class="panel-confirmacion" *ngIf="confirmado == artist._id">
+						<label>¿Está seguro?</label>
+						<div>
+							<button mat-stroked-button color="primary" *ngIf="identity.role =='ROLE_ADMIN'" 
+							(click)="onDeleteArtist(artist._id)">
+						    	Confirmar
+							</button>
+							<button mat-stroked-button *ngIf="identity.role =='ROLE_ADMIN'" 
+							(click)="onCancelArtist()">
+						    	Cancelar
+							</button>
+						</div>	
+					</div>
 
-			</mat-card-actions>
-		</mat-card>
+				</mat-card-actions>
+			</mat-card>
+		</div>
+
 	</div>
 
 </div>
-
-<ul class="pagination right">
-	<li class="waves-effect">
-		<a [routerLink]="['/artistas', prev_page]"><mat-icon>chevron_left</mat-icon></a>
-	</li>
-	<li class="waves-effect">
-		<a [routerLink]="['/artistas', next_page]"><mat-icon>chevron_right</mat-icon></a>
-	</li>
-</ul>

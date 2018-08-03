@@ -24,6 +24,18 @@
   }
 }
 
+.card.horizontal.album-card {
+  .card-image {
+    margin-left: 10px;
+    img {
+      object-fit: cover;
+      min-height: 120px;
+      max-height: 140px;
+      width: auto;
+    }
+  }  
+}
+
 .mat-card {
   font-family: "Montserrat", sans-serif;
   background-color: lighten($background-color-dark,5%);

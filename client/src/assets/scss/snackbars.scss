@@ -1,0 +1,23 @@
+.green-snackbar {
+    background-color: $success-color;
+    color: $success-color-light;
+    .mat-simple-snackbar{
+    	justify-content: center;
+	}    
+}
+
+.red-snackbar {
+    background-color: $error-color;
+    color: $error-color-light;
+    .mat-simple-snackbar{
+      justify-content: center;
+  }    
+}
+
+.yellow-snackbar {
+    background-color: $alert-color;
+    color: $background-color-dark;
+    .mat-simple-snackbar{
+      justify-content: center;
+  }    
+}

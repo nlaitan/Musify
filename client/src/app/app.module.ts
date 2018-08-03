@@ -10,10 +10,16 @@ import 'materialize-css';
 import { MaterializeModule } from 'angular2-materialize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// AUDIO PLAYER
+import {VgCoreModule} from 'videogular2/core';
+import {VgControlsModule} from 'videogular2/controls';
+import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+import {VgBufferingModule} from 'videogular2/buffering';
+
 import { 
-  MatButtonModule, MatCardModule, MatExpansionModule,
-  MatIconModule, MatListModule, MatPaginatorModule,
-  MatInputModule, MatSidenavModule, MatSnackBarModule
+  MatButtonModule, MatCardModule, MatExpansionModule, 
+  MatIconModule, MatListModule, MatPaginatorModule, MatTableModule,
+  MatInputModule, MatSidenavModule, MatSnackBarModule, MatTooltipModule
   } from '@angular/material';
 
 // ----- MIS COMPONENTS ----- //
@@ -26,10 +32,15 @@ import { ArtistAddComponent } from './components/artist-add.component';
 import { ArtistEditComponent } from './components/artist-edit.component';
 import { ArtistDetailComponent } from './components/artist-detail.component';
 
-//ALBUM
+// ALBUM
 import { AlbumAddComponent } from './components/album-add.component';
 import { AlbumEditComponent } from './components/album-edit.component';
 import { AlbumDetailComponent } from './components/album-detail.component';
+
+// SONG
+import { SongAddComponent } from './components/song-add.component';
+import { SongEditComponent } from './components/song-edit.component';
+import { PlayerComponent } from './components/player.component';
 
 import { HomeComponent } from './components/home.component';
 
@@ -38,13 +49,13 @@ import { HomeComponent } from './components/home.component';
   declarations: [
     AppComponent,
     UserEditComponent,
-    ArtistListComponent,
-    ArtistAddComponent,
-    ArtistEditComponent,
-    ArtistDetailComponent,
-    AlbumAddComponent,
-    AlbumEditComponent,
-    AlbumDetailComponent,
+    // ARTIST
+    ArtistListComponent, ArtistAddComponent, ArtistEditComponent, ArtistDetailComponent,
+    // ALBUM
+    AlbumAddComponent, AlbumEditComponent, AlbumDetailComponent,
+    // SONG
+    SongAddComponent, SongEditComponent,
+    PlayerComponent,
     HomeComponent
   ],
   imports: [
@@ -52,11 +63,12 @@ import { HomeComponent } from './components/home.component';
     FormsModule,
     NgxPopper,
     MaterializeModule,
+    VgCoreModule, VgControlsModule, VgBufferingModule, VgOverlayPlayModule,
 
     // ANGULAR MATERIAL //
     MatButtonModule, MatCardModule, MatExpansionModule,
-    MatIconModule, MatListModule, MatPaginatorModule,
-    MatInputModule, MatSidenavModule, MatSnackBarModule,
+    MatIconModule, MatListModule, MatPaginatorModule, MatTableModule,
+    MatInputModule, MatSidenavModule, MatSnackBarModule, MatTooltipModule,
     BrowserAnimationsModule,
     // FIN ANGULAR MATERIAL //
 

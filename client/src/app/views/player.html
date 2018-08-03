@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="player">
+
+		<div class="album-image hide-on-small-only">
+			<span *ngIf="song.album">
+				<img id="play-image-album" src="{{ url + 'get-image-album/' + song.album.image }}" />
+			</span>
+			<span *ngIf="!song.album">
+				<img id="play-image-album" src="../assets/img/music.ico" />
+			</span>
+		</div>
+		
+		<div [style]="getPlayerStyle()" class="song-info center-align center-block">
+			<label class="valign-wrapper" id="song-title">
+				<div *ngIf="song.album.artist">{{song.album.artist.name}}</div>&nbsp;-&nbsp; 
+				<div *ngIf="song">{{ song.name }}</div>
+			</label>
+		</div>
+
+		<vg-player [style]="getPlayerStyle()" class="player-principal">
+		    <vg-controls>
+		        <vg-play-pause></vg-play-pause>
+		        <vg-time-display class="hide-on-small-only" vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+		        <vg-scrub-bar [vgSlider]="true">
+		            <vg-scrub-bar-current-time [vgSlider]="true"></vg-scrub-bar-current-time>
+		            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+		        </vg-scrub-bar>
+		        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+		        <vg-volume [vgFor]="myAudio" class="hide-on-small-only"></vg-volume>
+		        <vg-mute></vg-mute>
+		    </vg-controls>
+
+		    <audio #media [vgMedia]="media" id="myAudio" preload="auto">
+		        <source type="audio/mpeg" id="audio_source">
+		    </audio>
+		</vg-player>
+			
+	</div>
+
+</div>

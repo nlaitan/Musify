@@ -12,6 +12,9 @@
 @import "avatar";
 @import "cards";
 @import "forms";
+@import "audio-player";
+@import "tables";
+@import "snackbars";
 
 html {
   font-family: "Montserrat", sans-serif;
@@ -33,6 +36,10 @@ a, input, h3, h4, h5, textarea {
 header, main, footer {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
+}
+
+.componente-principal-actual {
+  padding-bottom: 200px;
 }
 
 .primary {
@@ -59,30 +66,6 @@ header, main, footer {
 
 .seven-width {
   width: 75%;
-}
-
-.green-snackbar {
-    background-color: $success-color;
-    color: $success-color-light;
-    .mat-simple-snackbar{
-    	justify-content: center;
-	}    
-}
-
-.red-snackbar {
-    background-color: $error-color;
-    color: $error-color-light;
-    .mat-simple-snackbar{
-      justify-content: center;
-  }    
-}
-
-.yellow-snackbar {
-    background-color: $alert-color;
-    color: $background-color-dark;
-    .mat-simple-snackbar{
-      justify-content: center;
-  }    
 }
 
 .transparent {
@@ -125,4 +108,15 @@ button.mat-mini-fab.mat-accent {
   background-size: cover;
 }
 
+.pagination {
+  width: 88px;
+  margin-top: -10px;
+  margin-right: 10px;
+  a:hover {
+    background-color: $background-color-very-dark;
+  }
+}
 
+.mat-drawer-content {
+  min-height: 120%;
+}

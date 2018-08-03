@@ -1,61 +1,63 @@
-<div *ngIf="artist" class="row">
-	
-    <div class="card horizontal">
-        <div class="card-image">
-            <img src="{{url + 'get-image-artist/' + artist.image}}" >
-        </div>
-        <div class="card-stacked">
-            <div class="card-content">
-            	<p class="card-title">
-                    <a [routerLink]="['/editar-artista', artist._id]">{{ artist.name }}</a>
-                </p>
-                <p>{{ artist.description }}</p>
-            </div>
-        </div>
-    </div>
-    
-	<button mat-flat-button [routerLink]="['/crear-album', artist._id]" 
-	*ngIf="identity.role =='ROLE_ADMIN'">
-		<mat-icon aria-label="album">edit</mat-icon>
-		Añadir álbum
-	</button>
-</div>
-
-<div *ngIf="artist && albums" class="row">
-	<div class="col xl2 l3 m4 s6" *ngFor="let album of albums">
-        
-        <div class="card">
+<div class="componente-principal-actual">
+    <div *ngIf="artist" class="row">
+    	
+        <div class="card horizontal">
             <div class="card-image">
-                <img *ngIf="album.image != 'null'" class="image-artist" src="{{url + 'get-image-album/' + album.image}}">
-                <a class="btn-floating halfway-fab waves-effect waves-light purple darken-2" [routerLink]="['/editar-album', album._id]" *ngIf="identity.role =='ROLE_ADMIN'">
-                    <i class="material-icons">edit</i>
-                </a>
+                <img src="{{url + 'get-image-artist/' + artist.image}}" >
             </div>
-            <div class="card-content center-align">
-                <span class="card-title flow-text">
-                    <a [routerLink]="['/album', album._id]">
-                        {{ album.title }}
-                    </a>
-                </span>
-                <div class="album">
-                    <p>
-                        <a [routerLink]="['/artista', album.artist._id]">{{ album.artist.name }}</a>
+            <div class="card-stacked">
+                <div class="card-content">
+                	<p class="card-title">
+                        <a [routerLink]="['/editar-artista', artist._id]">{{ artist.name }}</a>
                     </p>
-                    <p>{{ album.description }}</p>
-                    <p>{{ album.year }}</p>
-                </div>
-                <a class="btn-floating halfway-fab waves-effect waves-light transparent z-depth-0" (click)="onDeleteConfirm(album._id)" *ngIf="identity.role =='ROLE_ADMIN'">
-                    <i class="material-icons red-text text-darken-3">delete</i>
-                </a>
-                <div class="panel-confirmacion" *ngIf="confirmado == album._id">
-                    <label>¿Eliminar?</label>
-                    <div class="center-align">
-                        <button mat-button color="primary" *ngIf="identity.role =='ROLE_ADMIN'" (click)="onDeleteAlbum(album._id)">Confirmar</button>
-                        <button mat-button *ngIf="identity.role =='ROLE_ADMIN'" (click)="onCancelAlbum()">Cancelar</button>
-                    </div>  
+                    <p>{{ artist.description }}</p>
                 </div>
             </div>
         </div>
+        
+    	<button mat-flat-button [routerLink]="['/crear-album', artist._id]" 
+    	*ngIf="identity.role =='ROLE_ADMIN'">
+    		<mat-icon aria-label="album">edit</mat-icon>
+    		Añadir álbum
+    	</button>
+    </div>
 
+    <div *ngIf="artist && albums" class="row">
+    	<div class="col xl2 l3 m4 s6" *ngFor="let album of albums">
+            
+            <div class="card" style="margin-top: 40px;">
+                <div class="card-image">
+                    <img *ngIf="album.image != 'null'" class="image-artist" src="{{url + 'get-image-album/' + album.image}}">
+                    <a class="btn-floating halfway-fab waves-effect waves-light purple darken-2" [routerLink]="['/editar-album', album._id]" *ngIf="identity.role =='ROLE_ADMIN'">
+                        <i class="material-icons">edit</i>
+                    </a>
+                </div>
+                <div class="card-content center-align">
+                    <span class="card-title flow-text">
+                        <a [routerLink]="['/album', album._id]">
+                            {{ album.title }}
+                        </a>
+                    </span>
+                    <div class="album">
+                        <p>
+                            <a [routerLink]="['/artista', album.artist._id]">{{ album.artist.name }}</a>
+                        </p>
+                        <p>{{ album.description }}</p>
+                        <p>{{ album.year }}</p>
+                    </div>
+                    <a class="btn-floating halfway-fab waves-effect waves-light transparent z-depth-0" (click)="onDeleteConfirm(album._id)" *ngIf="identity.role =='ROLE_ADMIN'">
+                        <i class="material-icons red-text text-darken-3">delete</i>
+                    </a>
+                    <div class="panel-confirmacion" *ngIf="confirmado == album._id">
+                        <label>¿Eliminar?</label>
+                        <div class="center-align">
+                            <button mat-button color="primary" *ngIf="identity.role =='ROLE_ADMIN'" (click)="onDeleteAlbum(album._id)">Confirmar</button>
+                            <button mat-button *ngIf="identity.role =='ROLE_ADMIN'" (click)="onCancelAlbum()">Cancelar</button>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
