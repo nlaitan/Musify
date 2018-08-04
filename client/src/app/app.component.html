@@ -12,7 +12,9 @@
             </div>
             <mat-card-title-group>
                 <mat-card-title>
-                    <span id="userData" class="flow-text" color="white">{{identity.name}} {{identity.lastname}}</span>
+                    <span id="userData" color="white">
+                        {{identity.name}} {{identity.lastname}}
+                    </span>
                 </mat-card-title>
                 <mat-card-subtitle>
                     <span>{{identity.email}}</span>   
@@ -22,11 +24,11 @@
         <mat-nav-list>
             <a [routerLink]="['/artistas', 1]" [routerLinkActive]="['actived']" >
                 <mat-list-item> 
-                    <mat-icon>star</mat-icon>&nbsp;
+                    <mat-icon>recent_actors</mat-icon>&nbsp;
                     Artistas
                 </mat-list-item>
             </a>
-            <a [routerLinkActive]="['actived']">
+            <a [routerLink]="['/all-albums', 1]"  [routerLinkActive]="['actived']">
                 <mat-list-item>
                     <mat-icon>album</mat-icon>&nbsp;
                     Álbums
@@ -36,6 +38,12 @@
                 <mat-list-item>
                     <mat-icon>playlist_play</mat-icon>&nbsp;
                     Playlists
+                </mat-list-item>
+            </a>
+            <a [routerLinkActive]="['actived']">
+                <mat-list-item>
+                    <mat-icon>library_music</mat-icon>&nbsp;
+                    Géneros
                 </mat-list-item>
             </a>
             <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']" >

@@ -10,6 +10,7 @@ var md_upload = multipart({ uploadDir: './uploads/albums' });
 
 api.get('/album/:id', md_auth.ensureAuth, AlbumController.getAlbum);
 api.get('/albums/:artist?', md_auth.ensureAuth, AlbumController.getAlbums);
+api.get('/all-albums/:page?', md_auth.ensureAuth, AlbumController.getAllAlbums);
 api.post('/album', md_auth.ensureAuth, AlbumController.saveAlbum);
 api.put('/album/:id', md_auth.ensureAuth, AlbumController.updateAlbum);
 api.delete('/album/:id', md_auth.ensureAuth, AlbumController.deleteAlbum);

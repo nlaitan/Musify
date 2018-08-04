@@ -57,6 +57,15 @@ export class AlbumService {
    
     }
 
+    getAllAlbums(token, page){
+        let headers = new HttpHeaders({
+           'Content-Type':'application/json',
+           'Authorization': token
+        });
+        
+        return this._http.get(this.url + 'all-albums/' + page, {headers: headers}).pipe(map(res => res));
+    }
+
     deleteAlbum(token, id: string){
       const options = { 
           headers: new HttpHeaders({

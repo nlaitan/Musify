@@ -29,8 +29,6 @@ export class AlbumDetailComponent implements OnInit {
 	public albums: Album[];
 	public songs: Song[];
 	public confirmado;
-	animal: string;
-	name: string;
 
 	constructor(
 		private _route: ActivatedRoute,

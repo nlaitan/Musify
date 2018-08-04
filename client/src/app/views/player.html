@@ -5,14 +5,16 @@
 			<span *ngIf="song.album">
 				<img id="play-image-album" src="{{ url + 'get-image-album/' + song.album.image }}" />
 			</span>
-			<span *ngIf="!song.album">
+			<span *ngIf="song && !song.album">
 				<img id="play-image-album" src="../assets/img/music.ico" />
 			</span>
 		</div>
 		
 		<div [style]="getPlayerStyle()" class="song-info center-align center-block">
 			<label class="valign-wrapper" id="song-title">
-				<div *ngIf="song.album.artist">{{song.album.artist.name}}</div>&nbsp;-&nbsp; 
+				<div *ngIf="song && song.album && song.album.artist">
+					{{song.album.artist.name}}&nbsp;-&nbsp; 
+				</div>
 				<div *ngIf="song">{{ song.name }}</div>
 			</label>
 		</div>

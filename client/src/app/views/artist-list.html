@@ -1,14 +1,16 @@
 <div class="componente-principal-actual">
 	<div class="head-page" *ngIf="identity">
-		<h4>{{ titulo }}</h4>
 		<a [routerLink]="['/crear-artista']" href="#" *ngIf="identity.role == 'ROLE_ADMIN'" mat-flat-button>Añadir Artista</a>
+		<label class="list-title">
+			{{ titulo }} 
+		</label>
 
 		<div class="pagination right">
-			<li class="waves-effect">
-				<a [routerLink]="['/artistas', prev_page]"><mat-icon>chevron_left</mat-icon></a>
+			<li>
+				<button mat-mini-fab [routerLink]="['/artistas', prev_page]"><mat-icon>chevron_left</mat-icon></button>
 			</li>
-			<li class="waves-effect">
-				<a [routerLink]="['/artistas', next_page]"><mat-icon>chevron_right</mat-icon></a>
+			<li>
+				<button mat-mini-fab [routerLink]="['/artistas', next_page]"><mat-icon>chevron_right</mat-icon></button>
 			</li>
 		</div>
 	</div>

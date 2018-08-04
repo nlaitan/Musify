@@ -33,6 +33,7 @@ import { ArtistEditComponent } from './components/artist-edit.component';
 import { ArtistDetailComponent } from './components/artist-detail.component';
 
 // ALBUM
+import { AlbumListComponent } from './components/album-list.component';
 import { AlbumAddComponent } from './components/album-add.component';
 import { AlbumEditComponent } from './components/album-edit.component';
 import { AlbumDetailComponent } from './components/album-detail.component';
@@ -52,7 +53,7 @@ import { HomeComponent } from './components/home.component';
     // ARTIST
     ArtistListComponent, ArtistAddComponent, ArtistEditComponent, ArtistDetailComponent,
     // ALBUM
-    AlbumAddComponent, AlbumEditComponent, AlbumDetailComponent,
+    AlbumListComponent, AlbumAddComponent, AlbumEditComponent, AlbumDetailComponent,
     // SONG
     SongAddComponent, SongEditComponent,
     PlayerComponent,

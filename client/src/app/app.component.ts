@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
     public successRegister;
     public url: string;
     public closed: boolean;
-    public recalcular: boolean;
 
     constructor(
         private _route: ActivatedRoute,
@@ -39,7 +38,6 @@ export class AppComponent implements OnInit {
         this.user = new User('', '', '', '', '', 'ROLE_USER', '');
         this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
         this.url = GLOBAL.url;
-        this.recalcular = true;
     }
     
     ngOnInit(){

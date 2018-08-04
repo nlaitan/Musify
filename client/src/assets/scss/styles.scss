@@ -40,10 +40,24 @@ header, main, footer {
 
 .componente-principal-actual {
   padding-bottom: 200px;
+  padding-left: 5px;
 }
 
 .primary {
 	background-color: $primary-color-dark;
+}
+
+.head-page {
+  padding: 10px 10px 2px 10px;
+  text-align: center;
+  a {
+    float: left;
+    margin-top: 13px;
+  }
+  .list-title {
+    font-size: 40px;
+    color: $text-color;
+  }
 }
 
 .logo {
@@ -54,18 +68,6 @@ header, main, footer {
 
 .file-field .fa {
     font-size: 20px;
-}
-
-.half-width {
-  width: 50%;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.seven-width {
-  width: 75%;
 }
 
 .transparent {
@@ -96,6 +98,13 @@ button.mat-mini-fab.mat-accent {
 }
 
 .row {
+  &.albums-row {
+    text-align: center;
+    .col {
+      display: inline-block;
+      float: none;
+    }
+  }
   .entity-card {
     width: 100%;
     height: auto;
@@ -110,10 +119,13 @@ button.mat-mini-fab.mat-accent {
 
 .pagination {
   width: 88px;
-  margin-top: -10px;
-  margin-right: 10px;
-  a:hover {
-    background-color: $background-color-very-dark;
+  margin-right: 5px;
+  margin-top: 5px;
+  li {
+    height: 40px;
+    mat-icon {
+      color: $background-color-very-dark;
+    } 
   }
 }
 

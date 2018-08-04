@@ -50,6 +50,23 @@ function getAlbums(req,res){
     
 }
 
+function getAllAlbums(req, res){
+    if(req.params.page){
+        var page = req.params.page;
+    }else{
+        var page = 1;
+    }
+
+    var itemsPerPage = 12;
+    var find = Album.find({}).sort('year');
+
+    find.paginate(page, itemsPerPage, function(err, albums, total){
+        find.populate({path: 'artist'}).exec((err, albums) => {
+            Utils.checkErrors(err, res, albums, 'listar', 'álbums')
+        });
+    });
+}
+
 function updateAlbum(req,res){
     var albumId = req.params.id;
     var update = req.body;
@@ -109,6 +126,7 @@ module.exports = {
     getAlbum,
     saveAlbum,
     getAlbums,
+    getAllAlbums,
     updateAlbum,
     deleteAlbum,
     uploadImage,

@@ -9,7 +9,10 @@
                 <div class="card-stacked">
                     <div class="card-content">
                     	<p class="card-title" *ngIf="identity.role =='ROLE_ADMIN'">
-                            <a [routerLink]="['/editar-album', album._id]"> {{ album.title }} </a>
+                            <a [routerLink]="['/editar-album', album._id]" 
+                            matTooltip="{{album.title}}"> 
+                                {{ album.title }} 
+                            </a>
                         </p>
                         <p class="card-title" *ngIf="identity.role =='ROLE_USER' && album.artist">
                             {{ album.title }}
@@ -67,7 +70,8 @@
                                 </a>
                                 <div class="panel-confirmacion-cancion" *ngIf="confirmado == song._id">
                                     <p><strong>¿Eliminar?</strong></p>
-                                    <button class="waves-effect waves-light btn-flat white-text" *ngIf="identity.role =='ROLE_ADMIN'" (click)="onDeleteSong(song._id)">Si</button>
+                                    <button class="waves-effect waves-light btn-flat white-text" *ngIf="identity.role =='ROLE_ADMIN'" 
+                                    (click)="onDeleteSong(song._id)">Si</button>
                                     <button class="waves-effect waves-light btn-flat red-text text-darken-1" *ngIf="identity.role =='ROLE_ADMIN'" (click)="onCancelSong()">No</button> 
                                 </div>
                             </td>

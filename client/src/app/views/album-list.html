@@ -1,29 +1,22 @@
 <div class="componente-principal-actual">
-    <div *ngIf="artist" class="row">
-    	
-        <div class="card horizontal">
-            <div class="card-image">
-                <img src="{{url + 'get-image-artist/' + artist.image}}" >
-            </div>
-            <div class="card-stacked">
-                <div class="card-content">
-                	<p class="card-title">
-                        <a [routerLink]="['/editar-artista', artist._id]">{{ artist.name }}</a>
-                    </p>
-                    <p>{{ artist.description }}</p>
-                </div>
-            </div>
-        </div>
-        
-    	<button mat-flat-button [routerLink]="['/crear-album', artist._id]" 
-    	*ngIf="identity.role =='ROLE_ADMIN'" style="margin-left: 10px;">
-    		<mat-icon aria-label="album">edit</mat-icon>
-    		Añadir álbum
-    	</button>
-    </div>
+	<div class="head-page" *ngIf="identity">
+		<label class="list-title">
+			{{ titulo }} 
+		</label>
 
-    <div *ngIf="artist && albums" class="row">
-    	<div class="col xl2 l3 m4 s6" *ngFor="let album of albums" style="padding-bottom: 35px;">
+		<div class="pagination right">
+			<li>
+				<button mat-mini-fab [routerLink]="['/all-albums', prev_page]"><mat-icon>chevron_left</mat-icon></button>
+			</li>
+			<li>
+				<button mat-mini-fab [routerLink]="['/all-albums', next_page]"><mat-icon>chevron_right</mat-icon></button>
+			</li>
+		</div>
+	</div>
+
+
+	<div *ngIf="albums" class="row albums-row">
+    	<div class="col xl2 l3 m4 s6" *ngFor="let album of albums" >
             
             <div class="card" >
                 <div class="card-image">
@@ -33,8 +26,8 @@
                     </a>
                 </div>
                 <div class="card-content center-align">
-                    <span class="card-title flow-text">
-                        <a [routerLink]="['/album', album._id]">
+                    <span class="card-title">
+                        <a [routerLink]="['/album', album._id]" matTooltip="{{ album.title }}">
                             {{ album.title }}
                         </a>
                     </span>
@@ -60,4 +53,5 @@
 
         </div>
     </div>
+
 </div>
