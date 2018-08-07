@@ -6,26 +6,27 @@
                 <div class="card-image">
                     <img src="{{url + 'get-image-album/' + album.image}}" >
                 </div>
+                <p class="card-title" *ngIf="identity.role =='ROLE_USER' && album.artist">
+                    {{ album.title }}
+                </p>
+                <p class="card-title" *ngIf="identity.role =='ROLE_ADMIN'">
+                    <a [routerLink]="['/editar-album', album._id]" 
+                    matTooltip="{{album.title}}"> 
+                        {{ album.title }} 
+                    </a>
+                </p>
                 <div class="card-stacked">
                     <div class="card-content">
-                    	<p class="card-title" *ngIf="identity.role =='ROLE_ADMIN'">
-                            <a [routerLink]="['/editar-album', album._id]" 
-                            matTooltip="{{album.title}}"> 
-                                {{ album.title }} 
-                            </a>
-                        </p>
-                        <p class="card-title" *ngIf="identity.role =='ROLE_USER' && album.artist">
-                            {{ album.title }}
-                        </p>
-                        <p *ngIf="identity.role =='ROLE_ADMIN'">
-                            <a [routerLink]="['/artista', album.artist._id]" >{{ album.artist.name }}</a>
-                        </p>
-                        <p *ngIf="identity.role =='ROLE_USER'">
-                            {{ album.artist.name }}
-                        </p>
-                        <p>{{ album.description }}</p>
-                        <p>{{ album.year }}</p>
-                        
+                        <div>
+                            <p *ngIf="identity.role =='ROLE_ADMIN'">
+                                <a [routerLink]="['/artista', album.artist._id]" >{{ album.artist.name }}</a>
+                            </p>
+                            <p *ngIf="identity.role =='ROLE_USER'">
+                                {{ album.artist.name }}
+                            </p>
+                            <p>{{ album.description }}</p>
+                            <p>{{ album.year }}</p>
+                        </div>  
                     </div>
                 </div>
             </div>

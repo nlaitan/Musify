@@ -18,12 +18,9 @@
 	<div *ngIf="albums" class="row albums-row">
     	<div class="col xl2 l3 m4 s6" *ngFor="let album of albums" >
             
-            <div class="card" >
+            <div class="card album-list" >
                 <div class="card-image">
                     <img *ngIf="album.image != 'null'" class="image-artist" src="{{url + 'get-image-album/' + album.image}}">
-                    <a class="btn-floating halfway-fab waves-effect waves-light purple darken-2" [routerLink]="['/editar-album', album._id]" *ngIf="identity.role =='ROLE_ADMIN'">
-                        <i class="material-icons">edit</i>
-                    </a>
                 </div>
                 <div class="card-content center-align">
                     <span class="card-title">
@@ -38,14 +35,19 @@
                         <p>{{ album.description }}</p>
                         <p>{{ album.year }}</p>
                     </div>
-                    <a class="btn-floating halfway-fab waves-effect waves-light transparent z-depth-0" (click)="onDeleteConfirm(album._id)" *ngIf="identity.role =='ROLE_ADMIN'">
+                    <a class="btn-floating halfway-fab transparent z-depth-0" [routerLink]="['/editar-album', album._id]" *ngIf="identity.role =='ROLE_ADMIN'" id="right-button"
+                    matTooltip="Editar">
+                        <i class="material-icons purple-text text-darken-3">edit</i>
+                    </a>
+                    <a class="btn-floating halfway-fab transparent z-depth-0" (click)="onDeleteConfirm(album._id)" *ngIf="identity.role =='ROLE_ADMIN'" id="left-button" 
+                    matTooltip="Eliminar">
                         <i class="material-icons red-text text-darken-3">delete</i>
                     </a>
                     <div class="panel-confirmacion" *ngIf="confirmado == album._id">
                         <label>¿Eliminar?</label>
                         <div class="center-align">
-                            <button mat-button color="primary" *ngIf="identity.role =='ROLE_ADMIN'" (click)="onDeleteAlbum(album._id)">Si</button>
-                            <button mat-button *ngIf="identity.role =='ROLE_ADMIN'" (click)="onCancelAlbum()">No</button>
+                            <button class="btn-small" *ngIf="identity.role =='ROLE_ADMIN'" (click)="onDeleteAlbum(album._id)">Si</button>
+                            <button class="btn-small"  *ngIf="identity.role =='ROLE_ADMIN'" (click)="onCancelAlbum()">No</button>
                         </div>  
                     </div>
                 </div>

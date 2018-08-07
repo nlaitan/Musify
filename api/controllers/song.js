@@ -36,6 +36,7 @@ function saveSong(req,res){
     
 }
 
+
 function getSongs(req,res){
     var albumId = req.params.album;
     
@@ -53,6 +54,7 @@ function getSongs(req,res){
     });
     
 }
+
 
 function updateSong(req,res){
     var songId = req.params.id;

@@ -10,8 +10,8 @@
 			</span>
 		</div>
 		
-		<div [style]="getPlayerStyle()" class="song-info center-align center-block">
-			<label class="valign-wrapper" id="song-title">
+		<div [style]="getSongInfoStyle()" class="song-info center-align center-block">
+			<label class="valign-wrapper truncar" id="song-title" >
 				<div *ngIf="song && song.album && song.album.artist">
 					{{song.album.artist.name}}&nbsp;-&nbsp; 
 				</div>
@@ -21,10 +21,11 @@
 
 		<vg-player [style]="getPlayerStyle()" class="player-principal">
 		    <vg-controls>
-		        <vg-play-pause></vg-play-pause>
+		        <vg-play-pause [style]="getPlayButtonStyle()"></vg-play-pause>
 		        <vg-time-display class="hide-on-small-only" vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-		        <vg-scrub-bar [vgSlider]="true">
-		            <vg-scrub-bar-current-time [vgSlider]="true"></vg-scrub-bar-current-time>
+		        <vg-scrub-bar [vgSlider]="true" id="scrub-bar-width">
+		            <vg-scrub-bar-current-time [vgSlider]="true">
+		            </vg-scrub-bar-current-time>
 		            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
 		        </vg-scrub-bar>
 		        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>

@@ -1,7 +1,8 @@
 'use strict'
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose'),
+ 	PlaylistSchema = require('./playlist.js'),
+	Schema = mongoose.Schema;
 
 var SongSchema = Schema({
 	number: String,

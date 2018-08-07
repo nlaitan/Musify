@@ -3,3 +3,9 @@
 	-moz-background-clip: padding;
 	background-clip: $arg;
 }
+
+@mixin background-gradient($arg) {
+	background: -moz-linear-gradient($arg);
+    background: -webkit-linear-gradient($arg);
+    background: $arg;    
+}

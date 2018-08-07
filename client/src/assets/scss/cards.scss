@@ -1,30 +1,3 @@
-.card.horizontal {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  height: 100%;
-  border-left: 4px solid $background-color;
-  background-color: darken( $background-color-dark, 3% );
-  .card-image {
-    margin-left: 10px;
-    img {
-      object-fit: cover;
-      min-height: 140px;
-      max-height: 180px;
-      width: auto;
-      margin-bottom: 0;
-    }
-  }
-  .card-stacked {
-    .card-content {
-      padding: 15px 5px 0 15px;
-      .card-title {
-        font-size: 35px;
-      }
-    }
-  }
-}
-
 .mat-card {
   font-family: "Montserrat", sans-serif;
   background-color: lighten($background-color-dark,5%);
@@ -82,30 +55,59 @@ mat-card {
 }
 
 .card {
+  margin-top: 20px;
   .card-image {
+    @media all and (min-width: 2000px) {
+      height: 250px;
+      margin-bottom: -60px;  
+    }
+    @media all and (min-width: 1440px) and (max-width: 2000px) {
+      height: 200px;
+      margin-bottom: -60px;   
+    }
+    @media all and (min-width: 600px) and (max-width: 1440px) {
+      height: 200px;
+      margin-bottom: -60px;
+    }
+    @media all and (max-width: 600px) {
+      height: 180px;
+      margin-bottom: -60px;
+    }
+
     img {
+      height: 100%;
       object-fit: cover;
-      margin-bottom: -20px;
+      margin-bottom: 0;
+      display: inline-block;
     }
     a {
       z-index: 20;
-      bottom: 0;
     }
   }
   .card-content {
     background-color: darken($background-color-dark,2%);
     border-radius: 0;
-    padding: 15px 0 5px 0;
-    position: relative;
+    position: absolute;
     z-index: 10;
+    text-align: center;
+    line-height: 1;
+    padding-bottom: 10px;
+    padding-top: 14px;
+    padding-right: 4px;
+    padding-left: 4px;
+    width: 100%;
+    height: 60px;
+    // GRADIENT 
+    @include background-gradient(linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,1) 100%));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
     .card-title {
       white-space: nowrap;
       overflow: hidden; 
       text-overflow: ellipsis; 
-      max-width: 200px;
       font-size: 16px;
-      padding-right: 5px;
-      padding-left: 5px;
+      margin-bottom: 3px;
+      line-height: 1;
+      text-shadow: 1px 1px 1px #000;
       a {
         font-weight: 600;
         &:hover {
@@ -114,32 +116,143 @@ mat-card {
         }
       }
     }
+    a#left-button {
+      right: -5px;
+    }
+    a#right-button {
+      right: 20px;
+    }
     .album {
       font-size: 13px;
       a:hover {
-        color: $primary-color;
-        border-bottom: 1px solid $primary-color; 
+        border-bottom: 1px solid $primary-color;
+        text-shadow: 1px 1px 1px #000; 
+      }
+    }
+    .panel-confirmacion {
+      top: -80px;
+      padding: 10px;
+      display: inline-block;
+      position: relative;
+      background-color: $background-color-dark;
+      div {
+        margin-top: 5px;
+        button {
+          height: 28px;
+          background-color: $background-color-dark;
+          &:hover {
+            background-color: $background-color-very-dark;
+            color: $primary-color-light;
+          }
+        }
       }
     }
   }
-  // HORIZONTAL CARD
-  &.horizontal.album-card {
+  &.album-list {
+    margin-top: 28px;
     .card-image {
-      margin-left: 10px;
-      img {
-        object-fit: cover;
-        min-height: 120px;
-        max-height: 140px;
-        margin-bottom: 0;
-        width: auto;
-      }
+        @media all and (min-width: 2000px) {
+          margin-bottom: -75px;  
+        }
+        @media all and (min-width: 1440px) and (max-width: 2000px) {
+          margin-bottom: -75px;   
+        }
+        @media all and (min-width: 600px) and (max-width: 1440px) {
+          margin-bottom: -75px;
+        }
+        @media all and (max-width: 600px) {
+          margin-bottom: -75px;
+        }
     }
     .card-content {
-      .card-title {
-        padding-left: 0;
-        font-size: 22px;
+        height: 85px;
+        padding-top: 15px;
+        @include background-gradient(linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 35%, rgba(0,0,0,1) 90%, rgba(0,0,0,1) 100%));
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
+    }
+  }
+  // HORIZONTAL CARD
+  &.horizontal {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 180px;
+    border-left: 4px solid $background-color;
+    background-color: darken( $background-color-dark, 3% );
+    .card-image {
+      @media all {
+        height: 180px;
+        margin-left: 10px;
+        img {
+          height: 100%;
+          object-fit: cover;
+          width: auto;
+          margin-bottom: 0;
+        }
       }
-    }  
+    }
+    .card-stacked {
+      .card-content {
+        padding: 15px 5px 0 15px;
+        background-color: $background-color-dark;
+        background: none;
+        .card-title {
+          font-size: 35px;
+        }
+      }
+    }
+    // HORIZONTAL ALBUM
+    &.album-card {
+      border-left: 0;
+      margin-bottom: 44px;
+      .card-image {
+        @media all {
+          height: 170px;
+          top: 42px;
+          img {
+            object-fit: cover;
+            height: 100%;
+            margin-bottom: 0;
+            overflow: hidden;
+            box-shadow: 2px 2px 2px black;
+          }
+          &:hover {
+            box-shadow: 2px 2px 8px black;
+          }
+        }
+      }
+      p.card-title {
+        padding-left: 9px;
+        padding-right: 5px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+        font-size: 20px;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        a {
+          text-shadow: 1px 1px black;
+          font-weight: 600;
+          &:hover {
+            color: $primary-color;  
+          }
+        }
+      }
+      .card-stacked {
+        height: 78%;
+        top: 22%;
+        .card-content {
+          height: 100%;
+          text-align: left;
+          padding: 2px 6px 2px 6px;
+          p {
+            margin-bottom: 8px;
+            text-shadow: 1px 1px black;
+          }
+        }   
+      }
+ 
+    }
   }
 }
 

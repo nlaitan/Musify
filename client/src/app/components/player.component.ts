@@ -40,7 +40,7 @@ export class PlayerComponent implements OnInit {
 	getPlayerStyle(){
 		if(!this.app.isSidenavClosed()){
 			let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-			width = width - 331;	// 250 de sidenav + 70 de imagen album
+			width = width - 341;	// 250 de sidenav + 70 de imagen album
 			let style = `width: ` + width + `px;`;
 			return this._sanitizer.bypassSecurityTrustStyle(style); 
 		} else {
@@ -49,5 +49,37 @@ export class PlayerComponent implements OnInit {
 	}
 
 
+	getSongInfoStyle() {
+		var style;
+		if (this.isSmallScreen()) {
+			style = `margin-left: 0px; `;
+		}
+		if(!this.app.isSidenavClosed()){
+			let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			width = width - 331;	// 250 de sidenav + 70 de imagen album
+			style = style + `width: ` + width + `px;`;
+			return this._sanitizer.bypassSecurityTrustStyle(style); 
+		} else {
+			style = style + `width: 100%;`;
+			return this._sanitizer.bypassSecurityTrustStyle(style);
+		}
+	}
+
+	getPlayButtonStyle() {
+		if (!this.isSmallScreen()) {
+			var timelineWidth = document.getElementById('scrub-bar-width').clientWidth;
+			var marginLeft = (timelineWidth / 2) + 43;
+			return this._sanitizer.bypassSecurityTrustStyle(`left: ` + marginLeft + `px;`);
+		}
+	}
+
+    isSmallScreen() {
+        const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        if (width < 600) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

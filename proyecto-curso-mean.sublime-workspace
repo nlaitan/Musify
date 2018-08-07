@@ -4,28 +4,112 @@
 		"selected_items":
 		[
 			[
-				"flo",
-				"float"
+				"play",
+				"playlists"
+			],
+			[
+				"pla",
+				"playlists"
+			],
+			[
+				"pl",
+				"playlists"
+			],
+			[
+				"playlis",
+				"playlists"
+			],
+			[
+				"song",
+				"songUpdated"
+			],
+			[
+				"p",
+				"playlists"
+			],
+			[
+				"up",
+				"uploadImage"
+			],
+			[
+				"get",
+				"getImageFile"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"padd",
+				"padding-bottom"
+			],
+			[
+				"card",
+				"card-stacked"
+			],
+			[
+				"par",
+				"parseInt\tfunction"
+			],
+			[
+				"save",
+				"savePlaylist"
 			],
 			[
 				"margin",
-				"margin-bottom"
+				"margin-top"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"margi",
+				"margin-left"
+			],
+			[
+				"back",
+				"background-gradient"
+			],
+			[
+				"P",
+				"padding"
+			],
+			[
+				"me",
+				"media\tlet"
+			],
+			[
+				"med",
+				"mediamin600\tlet"
+			],
+			[
+				"pi",
+				"primary-color"
+			],
+			[
+				"pad",
+				"padding-bottom"
+			],
+			[
+				"a",
+				"absolute"
+			],
+			[
+				"flo",
+				"float"
 			],
 			[
 				"PADD",
 				"padding-left"
 			],
 			[
-				"card",
-				"card-title"
-			],
-			[
 				"s",
 				"strong\tTag"
-			],
-			[
-				"padd",
-				"padding"
 			],
 			[
 				"mat",
@@ -44,32 +128,12 @@
 				"padding-bottom"
 			],
 			[
-				"text",
-				"text-align"
-			],
-			[
-				"pad",
-				"padding"
-			],
-			[
 				"ba",
 				"background-color-very-dark"
 			],
 			[
-				"border",
-				"border-radius"
-			],
-			[
-				"get",
-				"getElementById\tmethod"
-			],
-			[
 				"g",
 				"getElementById\tmethod"
-			],
-			[
-				"song",
-				"song_player\tlet"
 			],
 			[
 				"LOC",
@@ -98,10 +162,6 @@
 			[
 				"b",
 				"getElementById\tmethod"
-			],
-			[
-				"back",
-				"background-color"
 			],
 			[
 				"marg",
@@ -138,10 +198,6 @@
 			[
 				"fi",
 				"filesrc\tproperty"
-			],
-			[
-				"a",
-				"audiosrc\tproperty"
 			],
 			[
 				"Vg",
@@ -226,10 +282,6 @@
 			[
 				"Mate",
 				"MaterializeModule\talias"
-			],
-			[
-				"p",
-				"p\tTag"
 			],
 			[
 				"ArtistD",
@@ -380,10 +432,6 @@
 				"image_cover"
 			],
 			[
-				"margi",
-				"margin-bottom"
-			],
-			[
 				"user",
 				"user-view"
 			],
@@ -466,64 +514,34 @@
 			[
 				"Co",
 				"Component\talias"
-			],
-			[
-				"l",
-				"li\tTag"
-			],
-			[
-				"wid",
-				"width"
-			],
-			[
-				"font",
-				"font-size"
-			],
-			[
-				"v",
-				"vertical-align"
-			],
-			[
-				"va",
-				"valign-wrapper"
-			],
-			[
-				"grey",
-				"grey-text"
-			],
-			[
-				"set",
-				"setAttribute\tmethod"
-			],
-			[
-				"form",
-				"form-group"
-			],
-			[
-				"func",
-				"function\tkeyword"
-			],
-			[
-				"fil",
-				"filesToUpload\tproperty"
-			],
-			[
-				"on",
-				"onreadystatechange\tproperty"
-			],
-			[
-				"XML",
-				"XMLHttpRequest\tvar"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "client/src/app/app.component.html",
+			"file": "api/controllers/playlist.js",
 			"settings":
 			{
-				"buffer_size": 7496,
+				"buffer_size": 2552,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/controllers/song.js",
+			"settings":
+			{
+				"buffer_size": 2888,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/routes/song.js",
+			"settings":
+			{
+				"buffer_size": 991,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -599,44 +617,50 @@
 	"expanded_folders":
 	[
 		"/var/www/curso-mean",
-		"/var/www/curso-mean/client",
-		"/var/www/curso-mean/client/src",
-		"/var/www/curso-mean/client/src/app",
-		"/var/www/curso-mean/client/src/app/components",
-		"/var/www/curso-mean/client/src/app/services",
-		"/var/www/curso-mean/client/src/app/views",
-		"/var/www/curso-mean/client/src/assets",
-		"/var/www/curso-mean/client/src/assets/scss",
-		"/var/www/curso-mean/client/src/environments"
+		"/var/www/curso-mean/api",
+		"/var/www/curso-mean/api/controllers",
+		"/var/www/curso-mean/api/models",
+		"/var/www/curso-mean/api/routes",
+		"/var/www/curso-mean/api/utils"
 	],
 	"file_history":
 	[
-		"/var/www/curso-mean/client/src/app/views/album-list.html",
+		"/var/www/curso-mean/api/models/playlist.js",
+		"/var/www/curso-mean/api/routes/playlist.js",
+		"/var/www/curso-mean/api/controllers/song.js",
+		"/var/www/curso-mean/api/routes/song.js",
+		"/var/www/curso-mean/api/models/song.js",
+		"/var/www/curso-mean/api/utils/utils.js",
+		"/var/www/curso-mean/client/src/assets/scss/audio-player.scss",
+		"/var/www/curso-mean/client/src/app/views/player.html",
+		"/var/www/curso-mean/client/src/app/components/player.component.ts",
+		"/var/www/curso-mean/client/src/app/views/album-detail.html",
 		"/var/www/curso-mean/client/src/assets/scss/cards.scss",
-		"/var/www/curso-mean/client/src/assets/scss/styles.scss",
+		"/var/www/curso-mean/client/src/app/app.component.html",
+		"/var/www/curso-mean/client/src/assets/scss/menus.scss",
 		"/var/www/curso-mean/api/controllers/album.js",
+		"/var/www/curso-mean/api/controllers/playlist.js",
+		"/var/www/curso-mean/api/app.js",
+		"/var/www/curso-mean/client/src/assets/scss/styles.scss",
+		"/var/www/curso-mean/client/src/app/views/album-list.html",
+		"/var/www/curso-mean/client/src/app/views/artist-detail.html",
+		"/var/www/curso-mean/client/src/app/views/artist-list.html",
+		"/var/www/curso-mean/client/src/assets/scss/mixins.scss",
+		"/var/www/curso-mean/api/controllers/artist.js",
 		"/var/www/curso-mean/client/src/app/components/album-list.component.ts",
 		"/var/www/curso-mean/client/src/app/components/album-detail.component.ts",
-		"/var/www/curso-mean/client/src/app/views/album-detail.html",
-		"/var/www/curso-mean/client/src/assets/scss/audio-player.scss",
 		"/var/www/curso-mean/client/src/app/app.routing.ts",
 		"/var/www/curso-mean/api/routes/album.js",
 		"/var/www/curso-mean/client/src/app/services/album.service.ts",
-		"/var/www/curso-mean/client/src/app/views/artist-list.html",
 		"/var/www/curso-mean/client/src/app/services/artist.service.ts",
 		"/var/www/curso-mean/client/src/app/views/user-edit.html",
 		"/var/www/curso-mean/client/src/app/app.module.ts",
 		"/var/www/curso-mean/client/src/app/views/album-add.html",
 		"/var/www/curso-mean/client/src/app/views/home.html",
-		"/var/www/curso-mean/client/src/app/views/artist-detail.html",
 		"/var/www/curso-mean/client/src/app/app.component.ts",
-		"/var/www/curso-mean/client/src/app/views/player.html",
 		"/var/www/curso-mean/client/src/app/views/song-add.html",
 		"/var/www/curso-mean/client/src/app/views/artist-add.html",
-		"/var/www/curso-mean/client/src/app/components/player.component.ts",
 		"/var/www/curso-mean/client/src/assets/scss/tables.scss",
-		"/var/www/curso-mean/client/src/app/app.component.html",
-		"/var/www/curso-mean/client/src/assets/scss/menus.scss",
 		"/var/www/curso-mean/client/src/assets/scss/snackbars.scss",
 		"/var/www/curso-mean/client/src/app/services/song.service.ts",
 		"/var/www/curso-mean/client/src/app/views/dialog.html",
@@ -657,9 +681,6 @@
 		"/var/www/curso-mean/client/src/index.html",
 		"/var/www/curso-mean/client/src/app/components/artist-add.component.ts",
 		"/var/www/curso-mean/client/src/assets/scss/components/_variables.scss",
-		"/var/www/curso-mean/client/src/assets/scss/mixins.scss",
-		"/var/www/curso-mean/api/utils/utils.js",
-		"/var/www/curso-mean/api/controllers/artist.js",
 		"/var/www/curso-mean/api/routes/user.js",
 		"/var/www/curso-mean/api/controllers/user.js",
 		"/var/www/curso-mean/api/routes/artist.js",
@@ -688,7 +709,7 @@
 	],
 	"find":
 	{
-		"height": 42.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -731,24 +752,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "client/src/app/app.component.html",
+					"file": "api/controllers/playlist.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7496,
+						"buffer_size": 2552,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								659,
-								659
+								912,
+								912
 							]
 						],
 						"settings":
@@ -761,24 +782,24 @@
 								{
 									"1":
 									[
-										68,
-										69
+										2727,
+										2728
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/angle_bracket.png",
-										"region.orangish"
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
 									]
 								},
 								"open":
 								{
 									"1":
 									[
-										0,
-										1
+										2655,
+										2656
 									]
 								},
 								"unmatched":
@@ -792,11 +813,84 @@
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
@@ -807,41 +901,161 @@
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 162.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "api/controllers/song.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2888,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2032,
+								2032
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										2491,
+										2492
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"region.yellowish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										2471,
+										2472
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
-								"bh_angle_content"
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
 							"bracket_highlighter.locations":
 							{
@@ -849,24 +1063,24 @@
 								{
 									"1":
 									[
-										760,
-										764
+										2095,
+										2096
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/tag.png",
-										"region.orangish"
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
 									]
 								},
 								"open":
 								{
 									"1":
 									[
-										640,
-										644
+										1965,
+										1966
 									]
 								},
 								"unmatched":
@@ -880,11 +1094,11 @@
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
@@ -895,51 +1109,257 @@
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 318.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "api/routes/song.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 991,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								526,
+								526
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										532,
+										533
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/single_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										512,
+										513
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
-								"bh_angle_content"
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										532,
+										533
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/single_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										512,
+										513
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

@@ -5,7 +5,7 @@ var fs = require('fs');
 var mongoosePaginate = require('mongoose-pagination');
 var Utils = require('../utils/utils');
 
-var Artist = require('../models/artist');
+//var Artist = require('../models/artist');
 var Album = require('../models/album');
 var Song = require('../models/song');
 
@@ -109,6 +109,7 @@ function deleteAlbum(req,res){
                 });                
             } else {
                 deleteSongsOfAlbum(albumRemoved, res);
+                // borrar canciones de playlists o marcarlas
             }
         }    
     });

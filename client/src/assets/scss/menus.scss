@@ -1,12 +1,4 @@
-.nav-wrapper a {
-	@media all and (min-width: 600px) {
-        margin-top: 5px;
-        margin-left: 5px;    
-	}
-	@media all and (max-width: 600px) {
-	    margin-top: 2px;
-	}
-}
+
 
 .sidenav {
 	font-family: "Montserrat", sans-serif;
@@ -14,15 +6,29 @@
     background-color: darken($background-color-dark, 3%);
     .profile_card{
     	padding: 14px 10px 14px 10px;
+    	border-bottom-left-radius: 40px;
 	}
 	mat-card {
     	background-color: $primary-color-dark;
 	}
 }
 
-nav .brand-logo {
-    height: 64px;
-    //position: unset;
+nav {
+	height: 50px;
+	line-height: 50px;
+	.nav-wrapper {
+		a {
+		    margin-left: 3px; 
+		    margin-top: 3px;    
+		}
+		i {
+			height: 50px;
+			line-height: 50px;
+		}
+	} 
+	.brand-logo {
+    	height: 47px;
+	}
 }
 
 .actived mat-list-item {

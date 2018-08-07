@@ -41,7 +41,7 @@ function getArtists(req, res){
     }else{
         var page = 1;
     }
-    var itemsPerPage = 4;
+    var itemsPerPage = 12;
     Artist.find().sort('name').paginate(page, itemsPerPage, function(err, artists, total){
         if(err){
             res.status(500).send({message: 'Error en la petición.'});
