@@ -25,6 +25,14 @@ nav {
 			height: 50px;
 			line-height: 50px;
 		}
+		button {
+		    @media all and (max-width: 996px) {
+		      margin-left: 10px; 
+		    }
+		    @media all and (min-width: 996px) {
+		      margin-left: 65px;   
+		    }
+		}
 	} 
 	.brand-logo {
     	height: 47px;

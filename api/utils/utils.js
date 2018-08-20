@@ -19,12 +19,16 @@ function uploadImage(req,res,entity,entityName){
         var file_name = file_split[2];              // tomo el elemento 2
         var ext_split = file_name.split('\.')[1];   // extension del archivo
         
-        (ext_split == 'png' || ext_split == 'jpg' || ext_split == 'jpeg') ?
-            (entity.findByIdAndUpdate(entityId, {image: file_name}, (err, entityUpdated) => {
+        if (ext_split == 'png' || ext_split == 'jpg' || ext_split == 'jpeg') {
+            entity.findByIdAndUpdate(entityId, {image: file_name}, (err, entityUpdated) => {
+                err ? res.status(500).send({ message: 'Error en la petición' }) :
                 (!entityUpdated) ? 
                     (res.status(404).send({ message: 'No se ha podido actualizar ' + entityName })) :                
                     (res.status(200).send({ entity: entityUpdated, image: file_name }));    
-        })) : res.status(200).send({ message: 'Extensión de archivo no válida' }); 
+            })
+        } else {
+            res.status(200).send({ message: 'Extensión de archivo no válida' })
+        } 
     } else {
         res.status(200).send({
             message: 'No has subido ninguna imagen'

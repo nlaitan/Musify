@@ -148,23 +148,6 @@ export class AppComponent implements OnInit {
         }
     }
 
-    isExtraLargeScreen() {
-        const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        if (width > 1000) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    getButtonStyle(){
-       if(this.isExtraLargeScreen()){
-           return this._sanitizer.bypassSecurityTrustStyle(`margin-left: 65px;`);    
-       } else {
-           return this._sanitizer.bypassSecurityTrustStyle(`margin-left: 10px;`);  
-       }
-    }
-
     roundAvatar() {
         var img = document.getElementById("image_cover");        
         var imageWidth = img.clientWidth;

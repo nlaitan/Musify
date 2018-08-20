@@ -45,18 +45,15 @@ export class ArtistDetailComponent implements OnInit {
 			let id = params['id'];
 			this._artistService.getArtist(this.token, id).subscribe(
 				response => {
-					if(!response['entityName']) {
+					if(!response['artist']) {
 						this._router.navigate(['/']);
 					} else {
-						this.artist = response['entityName'];
+						this.artist = response['artist'];
 						// Obtener albums del artista
-						this._albumService.getAlbums(this.token, response['entityName']._id).subscribe(
+						this._albumService.getAlbums(this.token, response['artist']._id).subscribe(
 							response => {
-								if(!response['entityName']){
-									console.log('Este artista no tiene albums');
-								} else {
-									this.albums = response['entityName'];
-								}
+								response['entityName'] ? (this.albums = response['entityName']) :
+								console.log('Este artista no tiene albums')
 							},
 							error => {
 				                if(error != null){

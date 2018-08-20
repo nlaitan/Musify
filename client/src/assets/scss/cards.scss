@@ -1,59 +1,3 @@
-.mat-card {
-  font-family: "Montserrat", sans-serif;
-  background-color: lighten($background-color-dark,5%);
-  text-align: center;
-  justify-content: center;
-  mat-card-title {
-    white-space: nowrap;
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    max-width: 200px;
-  }
-  &.album-card {
-    padding: 0px 20px -10px 20px;
-    text-align: center;
-      justify-content: center;
-    mat-card-title {
-      text-align: center;
-      justify-content: center;
-      line-height: 1; 
-      margin-bottom: 4px; 
-      a {
-        font-size: 20px;
-      }
-    }
-    .mat-card-actions {
-      margin-bottom: 0px;
-      padding: 0px; 
-      position: fixed;
-    }
-  }
-  .mat-card-actions {
-    button{
-      margin-left: 8px;
-      margin-right: 8px;
-    }
-    .panel-confirmacion {
-      margin-top: -60px;
-      padding-bottom: 7px;
-      margin-left: 10px;
-      position: absolute;
-      background-color: $background-color-dark;
-    }
-  }
-}
-
-mat-card {
-  padding: 10px 8px 6px 8px;
-  mat-card-title span {
-    font-size: 20px;
-  }
-  .image-artist {
-    height: 200px;
-    object-fit: cover;
-  }
-}
-
 .card {
   margin-top: 20px;
   .card-image {
@@ -169,6 +113,27 @@ mat-card {
         padding-top: 15px;
         @include background-gradient(linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 35%, rgba(0,0,0,1) 90%, rgba(0,0,0,1) 100%));
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
+    }
+  }
+  &.playlist-card {
+    .card-content {
+      padding-top: 5px;
+    }
+    .playlist {
+      font-size: 13px;
+      p {
+        
+        margin-bottom: 10px;
+        line-height: 1em;
+        height: 2em;
+        overflow: hidden;
+        width: 100%;
+
+      }
+      a:hover {
+        border-bottom: 1px solid $primary-color;
+        text-shadow: 1px 1px 1px #000; 
+      }
     }
   }
   // HORIZONTAL CARD

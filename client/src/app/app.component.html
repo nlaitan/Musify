@@ -34,7 +34,7 @@
                     Álbums
                 </mat-list-item>
             </a>
-            <a [routerLinkActive]="['actived']">
+            <a [routerLink]="['/playlists/', identity._id]" [routerLinkActive]="['actived']">
                 <mat-list-item>
                     <mat-icon>playlist_play</mat-icon>&nbsp;
                     Playlists
@@ -72,7 +72,7 @@
                     <img src="./assets/img/music-playerx64.png" width="44">
                 </a>
                 
-                <button [style]="getButtonStyle()" color="primary" *ngIf="closed" mat-raised-button (click)="sidenav.open()" > 
+                <button color="primary" *ngIf="closed" mat-raised-button (click)="sidenav.open()" > 
                     Abrir menú
                 </button>
 

@@ -1,22 +1,22 @@
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../services/user.service';
-import { AlbumService } from '../services/album.service';
 import { GLOBAL } from '../services/global';
 import { AppComponent } from '../app.component';
-import { Artist } from '../models/artist';
-import { Album } from '../models/album';
+import { Playlist } from '../models/playlist';
+import { PlaylistService } from '../services/playlist.service';
 import { UploadService } from '../services/upload.service';
 
 @Component({
-	selector: 'album-edit',
-	templateUrl: '../views/album-add.html',
-	providers: [ UserService, AlbumService, UploadService ]
+	selector: 'playlist-edit',
+	templateUrl: '../views/playlist-add.html',
+	providers: [ UserService, PlaylistService, UploadService ]
 })
 
-export class AlbumEditComponent implements OnInit {
+export class PlaylistEditComponent implements OnInit {
 	public titulo: string;
-	public album: Album;
+	public submitName: string;
+	public playlist: Playlist;
 	public identity;
 	public token;
 	public url: string;
@@ -28,27 +28,28 @@ export class AlbumEditComponent implements OnInit {
 		private _route: ActivatedRoute,
 		private _router: Router,
 		private _userService: UserService,
-		private _albumService: AlbumService,
+		private _playlistService: PlaylistService,
 		private _uploadService: UploadService, 
         public app: AppComponent
 	){
-		this.titulo = 'Editar álbum',
+		this.titulo = 'Editar playlist',
+		this.submitName = 'Editar playlist',
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
-		this.album = new Album('', '', 2018, '', '', '', '');
+		this.playlist = new Playlist('', '', '', '', []);
 		this.is_edit = true;
 	}
 
 	ngOnInit(){
-		this.getAlbum();
+		this.getPlaylist();
 	}
 
 	onSubmit(){
 		this._route.params.forEach((params: Params)=> {
 			let id = params['id'];
 
-			this._albumService.editAlbum(this.token, id, this.album).subscribe(
+			this._playlistService.editPlaylist(this.token, id, this.playlist).subscribe(
 				response => {
 					if(!response['entityName']){
 						this.errorMessage = 'Error en el servidor';
@@ -56,16 +57,18 @@ export class AlbumEditComponent implements OnInit {
 					} else {
 						
 						this._uploadService.makeFileRequest(
-							this.url + 'upload-image-album/' + id, 
+							this.url + 'upload-image-playlist/' + id, 
 							[], this.filesToUpload, this.token, 'image'
 						).then(
 							(result) => {
-								this._router.navigate(['/artista', response['entityName'].artist]);
-								this.app.openSnackBar('Álbum editado correctamente', '', 'green-snackbar');
+								// redeirigir a playlist-detail
+								//this._router.navigate(['/playlist', response['entityName'].id]);
+								this.app.openSnackBar('Playlist editada correctamente', '', 'green-snackbar');
 							},
 							(error) => {
-								this._router.navigate(['/artista', response['entityName'].artist]);
-								this.app.openSnackBar('Álbum editado correctamente (sin imagen)', '', 'green-snackbar');
+								// redeirigir a playlist-detail
+								//this._router.navigate(['/playlist', response['entityName'].id]);
+								this.app.openSnackBar('Playlist editada correctamente (sin imagen)', '', 'green-snackbar');
 							}
 						);
 					}
@@ -80,15 +83,15 @@ export class AlbumEditComponent implements OnInit {
 		});
 	}
 
-	getAlbum(){
+	getPlaylist(){
 		this._route.params.forEach((params: Params)=> {	
 			let id = params['id'];
-			this._albumService.getAlbum(this.token, id).subscribe(
+			this._playlistService.getPlaylist(this.token, id).subscribe(
 				response => {
-					if(!response['entityName']){
+					if(!response['playlist']){
 						this._router.navigate(['/']);
 					} else {
-						this.album = response['entityName'];	
+						this.playlist = response['playlist'];
 					}
 				},
 				error => {

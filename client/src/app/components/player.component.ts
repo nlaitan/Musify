@@ -33,7 +33,7 @@ export class PlayerComponent implements OnInit {
 			let file_path = this.url + 'get-song-file/' + song.file;
 			document.getElementById("audio_source").setAttribute("src", file_path);
 		} else {
-			this.song = new Song(1, '', '', '', '');
+			this.song = new Song(1, '', '', '', '', '');
 		}
 	}
 

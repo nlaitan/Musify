@@ -105,6 +105,13 @@ button.mat-mini-fab.mat-accent {
       float: none;
     }
   }
+   &.playlists-row {
+    text-align: center;
+    .col {
+      display: inline-block;
+      // float: none;
+    }
+  }
   .entity-card {
     width: 100%;
     height: auto;

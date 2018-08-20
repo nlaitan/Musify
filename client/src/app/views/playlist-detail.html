@@ -1,0 +1,92 @@
+<div class="componente-principal-actual">
+    <div *ngIf="playlist" class="row" >
+        <!-- INFORMACIÓN DE LA PLAYLIST -->
+        <div class="col xl4 l6 m8 s12 offset-l3 offset-m2 left">
+            <div  class="card horizontal album-card">
+                <div class="card-image">
+                    <img src="{{url + 'get-image-playlist/' + playlist.image}}" >
+                </div>
+                <p class="card-title" *ngIf="identity.role =='ROLE_USER'">
+                    {{ playlist.title }}
+                </p>
+                <p class="card-title" *ngIf="identity.role =='ROLE_ADMIN'">
+                    <a [routerLink]="['/editar-playlist', playlist._id]" 
+                    matTooltip="{{playlist.title}}"> 
+                        {{ playlist.title }} 
+                    </a>
+                </p>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <div>
+                            <p> {{ playlist.description }} </p>
+                            <p> Creador: <br> 
+                                {{ playlist.user.name }} {{ playlist.user.lastname }}
+                            </p>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="center-align">
+                <button [routerLink]="['/crear-cancion', album._id]" mat-raised-button color="primary"
+                style="margin-top: 10px;" >Agregar canción</button>
+            </div>
+        	-->
+        </div>
+
+        <!-- LISTADO DE CANCIONES -->
+        <div *ngIf="playlist.songs && playlist.songs.length > 0" >
+            <div class="col xl8 l10 m12 s12 offset-l1" >
+            
+                <table class="" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>N°</th>
+                            <th>Título</th>
+                            <th>Atista</th>
+                            <th>Duración</th>
+                            <!--
+                            <th *ngIf="identity.role =='ROLE_ADMIN'">Acción</th>
+                        	-->
+                        </tr>
+                    </thead>
+
+                    <tbody *ngFor="let song of playlist.songs; let i = index">
+                        <tr>
+                            <td class="button_play">
+                                <a (click)="startPlayer(song)">
+                                    <mat-icon>play_arrow</mat-icon>
+                                </a>
+                            </td>
+                            <td>{{ i+1 }}</td>
+                            <td>{{ song.name }}</td>
+                            <td>{{ song.album.artist.name }}</td>
+                            <td>{{ song.duration }}</td>
+                            <!--
+                            <td *ngIf="identity.role =='ROLE_ADMIN'">
+                                <a [routerLink]="['/editar-cancion', song._id]" 
+                                matTooltip="Editar canción">
+                                    <mat-icon color="primary">edit</mat-icon>
+                                </a>
+                                <a (click)="onDeleteConfirm(song._id)">
+                                    <mat-icon color="warn">delete</mat-icon>
+                                </a>
+                                <div class="panel-confirmacion-cancion" *ngIf="confirmado == song._id">
+                                    <p><strong>¿Eliminar?</strong></p>
+                                    <button class="waves-effect waves-light btn-flat white-text" *ngIf="identity.role =='ROLE_ADMIN'" 
+                                    (click)="onDeleteSong(song._id)">Si</button>
+                                    <button class="waves-effect waves-light btn-flat red-text text-darken-1" *ngIf="identity.role =='ROLE_ADMIN'" (click)="onCancelSong()">No</button> 
+                                </div>
+                            </td>
+                        	-->
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    	
+
+    </div>
+</div>

@@ -4,6 +4,8 @@ export class Song{
         name: string,
         duration: string,
         file: string,
-        album: string
+        album: string,
+        genre: string
+
     ){ }
 }

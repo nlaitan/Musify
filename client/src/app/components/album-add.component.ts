@@ -35,7 +35,7 @@ export class AlbumAddComponent implements OnInit {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
-		this.album = new Album('', '', 2018, '', '');
+		this.album = new Album('', '', 2018, '', '', '', '');
 	}
 
 	ngOnInit(){

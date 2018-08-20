@@ -1,0 +1,48 @@
+<div class="componente-principal-actual">
+	<div class="row" style="margin-bottom: 10px;">
+		<div class="head-page" *ngIf="identity">
+			<a [routerLink]="['/crear-playlist']" *ngIf="identity.role == 'ROLE_ADMIN'" mat-flat-button>Crear Playlist</a>
+			<label class="list-title">
+				{{ titulo }} 
+			</label>
+		</div>
+	</div>
+
+	<div *ngIf="playlists" class="row playlists-row">
+    	<div class="col xl2 l3 m4 s6" *ngFor="let playlist of playlists" >
+            
+            <div class="card playlist-card" >
+                <div class="card-image">
+                    <img *ngIf="playlist.image != 'null'" class="image-artist" src="{{url + 'get-image-playlist/' + playlist.image}}">
+                </div>
+                <div class="card-content center-align">
+                    <span class="card-title">
+                        <a [routerLink]="['/playlist', playlist._id]" matTooltip="{{ playlist.title }}">
+                            {{ playlist.title }}
+                        </a>
+                    </span>
+                    <div class="playlist">
+                        <p>{{ playlist.description }}</p>
+                    </div>
+                    <a class="btn-floating halfway-fab transparent z-depth-0" [routerLink]="['/editar-playlist', playlist._id]" *ngIf="identity.role =='ROLE_ADMIN'"
+                    matTooltip="Editar" id="right-button">
+                        <i class="material-icons purple-text text-darken-3">edit</i>
+                    </a>
+                    <a class="btn-floating halfway-fab transparent z-depth-0" (click)="onDeleteConfirm(playlist._id)" *ngIf="identity.role =='ROLE_ADMIN'"
+                    matTooltip="Eliminar" id="left-button">
+                        <i class="material-icons red-text text-darken-3">delete</i>
+                    </a>
+                    <div class="panel-confirmacion" *ngIf="confirmado == playlist._id">
+                        <label>¿Eliminar?</label>
+                        <div class="center-align">
+                            <button class="btn-small" *ngIf="identity.role =='ROLE_ADMIN'" (click)="onDeletePlaylist(playlist._id)">Si</button>
+                            <button class="btn-small"  *ngIf="identity.role =='ROLE_ADMIN'" (click)="onCancelPlaylist()">No</button>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

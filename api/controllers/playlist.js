@@ -6,15 +6,28 @@ var mongoosePaginate = require('mongoose-pagination');
 var Utils = require('../utils/utils');
 
 var Playlist = require('../models/playlist');
-
-//var Album = require('../models/album');
 var Song = require('../models/song');
+
+
 
 function getPlaylist(req,res){
     
     var playlistId = req.params.id;
-    Playlist.findById(playlistId).populate({path: 'user'}).exec((err,playlist)=>{
-        Utils.checkErrors(err,res,playlist,'obtener','playlist');
+    
+    Playlist.findById(playlistId)
+    .populate({ path: 'user' })
+    .populate({ path: 'songs', select: 'name duration file', 
+                populate: { path: 'album', select: 'image', 
+                            populate: { path: 'artist', select: 'name' }  
+                } 
+    })
+    .exec((err,playlist)=>{
+        err ? (res.status(500).send({ message: 'Error en la petición' })) : 
+        !playlist ? res.status(404).send({ message: 'No existe la playlist' }) : 
+        (
+
+            res.status(200).send({ playlist })
+        ); 
     });
     
 }
@@ -39,13 +52,11 @@ function savePlaylist(req,res){
 
 
 function getPlaylists(req,res){
-    var playlistId = req.params.playlist;
-    
-    if(!playlistId){
-        var find = Playlist.find({}).sort('title');
-    } else {
-        var find = Playlist.find({playlist: playlistId}).sort('title');    
-    }
+    var userId = req.params.user;
+    var find;
+    !userId ? 
+        (find = Playlist.find({}).sort('title')) :
+        (find = Playlist.find({user: userId}).sort('title'));
     
     find.populate({path: 'user'}).exec((err, playlists) => {
         Utils.checkErrors(err, res, playlists, 'listar', 'playlists')
@@ -70,43 +81,63 @@ function deletePlaylist(req,res){
     Playlist.findByIdAndRemove(playlistId, (err, playlistRemoved)=>{
         err ? res.status(500).send({ message: 'Error al borrar la playlist' }) :
         !playlistRemoved ? res.status(404).send({ message: 'No se recibio playlist' }) :     
-        res.status(200).send({ message: 'Playlist borrada exitosamente' });  
+        res.status(200).send({ playlist: playlistRemoved });  
     });
 }
 
-/*
-function getPlaylistSongs(req,res){
-    var playlistId = req.params.playlist;
-    var find;
-    !playlistId ?
-        (find = Song.find({}).sort('number')) :
-        (find = Song.find({playlists: playlistId}).sort('name'));    
-    
-    find.populate({
-        path: 'playlist',                                  // matcheo playlists
-        populate: { path: 'artist', model: 'Artist' }       // vuelvo a matchear artistas
-    }).exec((err, songs) => {
-        Utils.checkErrors(err, res, songs, 'listar', 'canciones de playlist')
-    });
-    
-}
-*/
 
 function addSong(req,res){
     var playlistId = req.params.id;     // Bien recibido
     var songId = req.body.song;         // Bien recibido
     Playlist.findByIdAndUpdate(playlistId, 
-        {$push: {songs: songId}},
-        function(err, doc) {
-            err ? console.log(err) :
+        {$push: {songs: songId}},       // $push inserta un elemento en el array de songs
+        function(err, playlist) {
+            err ? res.status(500).send({ message: 'Error en la petición' }) :
+            !playlist ? res.status(404).send({ message: 'No existe la playlist' })  :
             res.status(200).send({ message: 'Cancion agregada exitosamente' }) 
+        }  
+    );   
+}
+
+function deleteSong(req,res){
+    var playlistId = req.params.id;     
+    var songId = req.body.song;         
+    Playlist.findByIdAndUpdate(playlistId, 
+        {$pull: {songs: songId}},       // $pull quita un elemento del array de songs
+        function(err, playlist) {
+            err ? res.status(500).send({ message: 'Error en la petición' }) :
+            !playlist ? res.status(404).send({ message: 'No existe la playlist' })  :
+            res.status(200).send({ message: 'Cancion eliminada exitosamente' }) 
         }  
     );   
 }
 
 
 function uploadImage(req,res){
-    Utils.uploadImage(req, res, Playlist, 'playlist');
+    var playlistId = req.params.id;
+    var file_name = 'No subido';
+    
+    if(req.files){
+        var file_path = req.files.image.path;
+        var file_split = file_path.split('\/');     // divido el nombre en un arreglo
+        var file_name = file_split[2];              // tomo el elemento 2
+        var ext_split = file_name.split('\.')[1];   // extension del archivo
+        
+        if (ext_split == 'png' || ext_split == 'jpg' || ext_split == 'jpeg') {
+            Playlist.findByIdAndUpdate(playlistId, {image: file_name}, (err, playlistUpdated) => {
+                err ? res.status(500).send({ message: 'Error en la petición' }) :
+                (!playlistUpdated) ? 
+                    (res.status(404).send({ message: 'No se ha podido subir la imagen' })) :                
+                    (res.status(200).send({ playlist: playlistUpdated, image: file_name }));    
+            }) 
+        } else {
+            res.status(200).send({ message: 'Extensión de archivo no válida' })
+        } 
+        
+    } else {
+        res.status(200).send({ message: 'No has subido ninguna imagen' });      
+    }
+    
 }
 
 function getImageFile(req,res){
@@ -122,7 +153,7 @@ module.exports = {
     deletePlaylist,
     uploadImage,
     getImageFile,
-    //getPlaylistSongs,
-    addSong
+    addSong,
+    deleteSong
 
 };

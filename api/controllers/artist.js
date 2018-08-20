@@ -12,12 +12,31 @@ var Song = require('../models/song');
 
 
 function getArtist(req,res){
-    
+
     var artistId = req.params.id;
-    Artist.findById(artistId, (err, artist) => {
-        Utils.checkErrors(err,res,artist,'obtener','artista');
+    
+    Artist.findById(artistId)
+    .populate({ path: 'genres', populate: { path: 'genre' } })
+    .exec((err,artist)=>{
+        err ? (res.status(500).send({ message: 'Error en la petición' })) : 
+        !artist ? res.status(404).send({ message: 'No existe la playlist' }) : 
+        res.status(200).send({ artist }); 
     });
     
+}
+
+function addGenre(req,res){
+    var artistId = req.params.id;     
+    var genreId = req.body.genre;         
+    Artist.findByIdAndUpdate(artistId, 
+        {$push: {genres: genreId}},       // $push inserta un elemento en el array de genres
+        function(err, artist) {
+            err ? 
+                res.status(500).send({ message: 'Error en la petición' }) :
+                !artist ? res.status(404).send({ message: 'No existe la playlist' })  :
+                    res.status(200).send({ artist }) 
+        }  
+    ); 
 }
 
 function saveArtist(req,res){
@@ -138,7 +157,8 @@ module.exports = {
     updateArtist,
     deleteArtist,
     uploadImage,
-    getImageFile
+    getImageFile,
+    addGenre
 };
 
 

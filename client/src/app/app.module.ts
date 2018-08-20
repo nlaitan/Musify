@@ -43,6 +43,16 @@ import { SongAddComponent } from './components/song-add.component';
 import { SongEditComponent } from './components/song-edit.component';
 import { PlayerComponent } from './components/player.component';
 
+// PLAYLIST
+import { PlaylistAddComponent } from './components/playlist-add.component';
+import { PlaylistEditComponent } from './components/playlist-edit.component';
+import { PlaylistListComponent } from './components/playlist-list.component';
+import { PlaylistDetailComponent } from './components/playlist-detail.component';
+
+
+// GENRE
+
+
 import { HomeComponent } from './components/home.component';
 
 
@@ -56,6 +66,9 @@ import { HomeComponent } from './components/home.component';
     AlbumListComponent, AlbumAddComponent, AlbumEditComponent, AlbumDetailComponent,
     // SONG
     SongAddComponent, SongEditComponent,
+    // PLAYLIST
+    PlaylistAddComponent, PlaylistEditComponent, PlaylistListComponent, PlaylistDetailComponent,
+
     PlayerComponent,
     HomeComponent
   ],

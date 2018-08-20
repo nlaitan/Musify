@@ -21,6 +21,13 @@ import { AlbumDetailComponent } from './components/album-detail.component';
 import { SongAddComponent } from './components/song-add.component';
 import { SongEditComponent } from './components/song-edit.component';
 
+// PLAYLIST
+import { PlaylistAddComponent } from './components/playlist-add.component';
+import { PlaylistEditComponent } from './components/playlist-edit.component';
+import { PlaylistListComponent } from './components/playlist-list.component';
+import { PlaylistDetailComponent } from './components/playlist-detail.component';
+
+
 import { HomeComponent } from './components/home.component';
 
 const appRoutes: Routes = [
@@ -37,6 +44,13 @@ const appRoutes: Routes = [
     // Canción
     { path: 'crear-cancion/:album', component: SongAddComponent },
     { path: 'editar-cancion/:id', component: SongEditComponent },
+    // Playlist
+    { path: 'crear-playlist', component: PlaylistAddComponent },
+    { path: 'editar-playlist/:id', component: PlaylistEditComponent },
+    { path: 'playlists/:user?', component: PlaylistListComponent },
+    { path: 'playlist/:id', component: PlaylistDetailComponent },
+
+    
     // Usuario
     { path: 'mis-datos', component: UserEditComponent },
     { path: '**', component: HomeComponent },

@@ -4,6 +4,8 @@ export class Album{
         description: string,
         year: number,
         image: string,
-        artist: string
+        artist: string,
+        first_genre: string,
+		second_genre: string
     ){ }
 }

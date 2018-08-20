@@ -3,6 +3,12 @@
 	[
 		{
 			"path": "."
+		},
+		{
+			"path": "/var/www/react-subte"
+		},
+		{
+			"path": "/var/www/random-users"
 		}
 	]
 }

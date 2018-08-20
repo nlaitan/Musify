@@ -11,6 +11,7 @@ var artist_routes = require('./routes/artist');
 var album_routes = require('./routes/album');
 var song_routes = require('./routes/song');
 var playlist_routes = require('./routes/playlist');
+var genre_routes = require('./routes/genre');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use('/api', artist_routes);
 app.use('/api', album_routes);
 app.use('/api', song_routes);
 app.use('/api', playlist_routes);
+app.use('/api', genre_routes);
 
 
 module.exports = app;

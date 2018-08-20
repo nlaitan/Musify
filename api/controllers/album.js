@@ -12,9 +12,13 @@ var Song = require('../models/song');
 function getAlbum(req,res){
     
     var albumId = req.params.id;
-    Album.findById(albumId).populate({path: 'artist'}).exec((err,album)=>{
-        Utils.checkErrors(err,res,album,'obtener','álbum');
-    });
+    Album.findById(albumId)
+        .populate({path: 'artist'})
+        .populate({path: 'first_genre'})
+        .populate({path: 'second_genre'})
+        .exec((err,album)=>{
+            Utils.checkErrors(err,res,album,'obtener','álbum');
+        });
     
 }
 
@@ -28,6 +32,8 @@ function saveAlbum(req,res){
     album.year = params.year;
     album.image = 'null';
     album.artist = params.artist;
+    album.first_genre = params.first_genre;
+    album.second_genre = params.second_genre;
     
     album.save((err, albumStored) => {
         Utils.checkErrors(err,res,albumStored,'guardar','álbum');
@@ -44,9 +50,12 @@ function getAlbums(req,res){
         var find = Album.find({artist: artistId}).sort('year');    
     }
     
-    find.populate({path: 'artist'}).exec((err, albums) => {
-        Utils.checkErrors(err, res, albums, 'listar', 'álbums')
-    });
+    find.populate({path: 'artist'})
+        .populate({path: 'first_genre'})
+        .populate({path: 'second_genre'})
+        .exec((err, albums) => {
+            Utils.checkErrors(err, res, albums, 'listar', 'álbums')
+        });
     
 }
 
