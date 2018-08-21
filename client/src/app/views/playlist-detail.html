@@ -42,10 +42,10 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>N°</th>
                             <th>Título</th>
                             <th>Atista</th>
                             <th>Duración</th>
+                            <th></th>
                             <!--
                             <th *ngIf="identity.role =='ROLE_ADMIN'">Acción</th>
                         	-->
@@ -59,27 +59,23 @@
                                     <mat-icon>play_arrow</mat-icon>
                                 </a>
                             </td>
-                            <td>{{ i+1 }}</td>
                             <td>{{ song.name }}</td>
                             <td>{{ song.album.artist.name }}</td>
                             <td>{{ song.duration }}</td>
-                            <!--
-                            <td *ngIf="identity.role =='ROLE_ADMIN'">
-                                <a [routerLink]="['/editar-cancion', song._id]" 
-                                matTooltip="Editar canción">
-                                    <mat-icon color="primary">edit</mat-icon>
-                                </a>
-                                <a (click)="onDeleteConfirm(song._id)">
-                                    <mat-icon color="warn">delete</mat-icon>
-                                </a>
-                                <div class="panel-confirmacion-cancion" *ngIf="confirmado == song._id">
-                                    <p><strong>¿Eliminar?</strong></p>
-                                    <button class="waves-effect waves-light btn-flat white-text" *ngIf="identity.role =='ROLE_ADMIN'" 
-                                    (click)="onDeleteSong(song._id)">Si</button>
-                                    <button class="waves-effect waves-light btn-flat red-text text-darken-1" *ngIf="identity.role =='ROLE_ADMIN'" (click)="onCancelSong()">No</button> 
-                                </div>
+                            <td>
+                                <button mat-mini-fab [matMenuTriggerFor]="menu" 
+                                class="transparent z-depth-0">
+                                    <mat-icon>more_horiz</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item>Ir al álbum</button>
+                                    <button mat-menu-item *ngIf="playlist.user._id == identity._id"
+                                    (click)="deleteSong(song)" >
+                                        Eliminar de esta playlist
+                                    </button>
+                                </mat-menu>
                             </td>
-                        	-->
+                        
                         </tr>
                     </tbody>
                 </table>

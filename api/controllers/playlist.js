@@ -100,8 +100,9 @@ function addSong(req,res){
 }
 
 function deleteSong(req,res){
-    var playlistId = req.params.id;     
-    var songId = req.body.song;         
+    var playlistId = req.params.id;    
+    var songId = req.body._id;
+    console.log('songId: ' + songId);
     Playlist.findByIdAndUpdate(playlistId, 
         {$pull: {songs: songId}},       // $pull quita un elemento del array de songs
         function(err, playlist) {

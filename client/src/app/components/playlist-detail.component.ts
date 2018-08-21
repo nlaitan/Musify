@@ -39,6 +39,7 @@ export class PlaylistDetailComponent implements OnInit {
 
 	ngOnInit(){
 		this.getPlaylist();
+		//console.log(this.identity);
 	}
 
 	getPlaylist(){
@@ -63,25 +64,14 @@ export class PlaylistDetailComponent implements OnInit {
 		
 	}
 
-	onDeleteConfirm(id){
-		this.confirmado = id;
-	}
-
-	onCancelSong(){
-		this.confirmado = null;
-	}
-
-	onDeleteSong(id){
-		this._songService.deleteSong(this.token, id).subscribe(
+	deleteSong(song){
+		this._playlistService.deleteSong(this.token, song, this.playlist).subscribe(
 			response => {
-				if(!response['entityName']) {
-					alert('Error en el servidor');
-				}
 				this.getPlaylist();
 			},
 			error => {
                 if(error != null){
-                    console.log(error.error.message);
+                    console.log(error);
                 }
             }
 		);

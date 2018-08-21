@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { GLOBAL } from './global';
 import { Playlist } from '../models/playlist';
+import { Song } from '../models/song';
 
 @Injectable()
 export class PlaylistService {
@@ -80,16 +81,15 @@ export class PlaylistService {
       return this._http.put(this.url + 'add-song-playlist/' + id, params, options).pipe(map(res => res));
     }
 
-    deleteSong(token, id: string, playlist: Playlist){
-      let params = JSON.stringify(playlist);
+    deleteSong(token, song: Song, playlist: Playlist){
+      let params = JSON.stringify(song);
       const options = { 
           headers: new HttpHeaders({
              'Content-Type':'application/json',
              'Authorization': token
           })
       };
-
-      return this._http.put(this.url + 'delete-song-playlist/' + id, params, options).pipe(map(res => res));
+      return this._http.put(this.url + 'delete-song-playlist/' + playlist['_id'], params, options).pipe(map(res => res));
     }
 
 }

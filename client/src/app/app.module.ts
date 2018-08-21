@@ -17,7 +17,7 @@ import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 import {VgBufferingModule} from 'videogular2/buffering';
 
 import { 
-  MatButtonModule, MatCardModule, MatExpansionModule, 
+  MatButtonModule, MatCardModule, MatExpansionModule, MatMenuModule,
   MatIconModule, MatListModule, MatPaginatorModule, MatTableModule,
   MatInputModule, MatSidenavModule, MatSnackBarModule, MatTooltipModule
   } from '@angular/material';
@@ -80,7 +80,7 @@ import { HomeComponent } from './components/home.component';
     VgCoreModule, VgControlsModule, VgBufferingModule, VgOverlayPlayModule,
 
     // ANGULAR MATERIAL //
-    MatButtonModule, MatCardModule, MatExpansionModule,
+    MatButtonModule, MatCardModule, MatExpansionModule, MatMenuModule,
     MatIconModule, MatListModule, MatPaginatorModule, MatTableModule,
     MatInputModule, MatSidenavModule, MatSnackBarModule, MatTooltipModule,
     BrowserAnimationsModule,
