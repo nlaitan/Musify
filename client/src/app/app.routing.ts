@@ -27,6 +27,8 @@ import { PlaylistEditComponent } from './components/playlist-edit.component';
 import { PlaylistListComponent } from './components/playlist-list.component';
 import { PlaylistDetailComponent } from './components/playlist-detail.component';
 
+// SEARCH
+import { SearchComponent } from './components/search.component';
 
 import { HomeComponent } from './components/home.component';
 
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
     { path: 'editar-playlist/:id', component: PlaylistEditComponent },
     { path: 'playlists/:user?', component: PlaylistListComponent },
     { path: 'playlist/:id', component: PlaylistDetailComponent },
-
+    // Busqueda
+    { path: 'busqueda', component: SearchComponent },
     
     // Usuario
     { path: 'mis-datos', component: UserEditComponent },

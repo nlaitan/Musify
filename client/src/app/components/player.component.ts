@@ -7,7 +7,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 import { VgAPI } from 'videogular2/core';
 import { SongService } from '../services/song.service';
 import { UserService } from '../services/user.service';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations'
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 export interface IMedia {
     id: string;
@@ -97,10 +97,16 @@ export class PlayerComponent implements OnInit {
         	this.nextSong.bind(this)
         );
         this.api.getDefaultMedia().subscriptions.loadedMetadata.subscribe(() => {
-            let subQueue = JSON.parse(localStorage.getItem("queue"));
-            if(!(this.queue.length === subQueue.length)) {
+            if (localStorage.getItem("newQueue")) {
+            	this.currentIndex = 0;
             	this.queue = JSON.parse(localStorage.getItem("queue"));
-            	this.currentIndex = this.queue.length - 1;
+            	localStorage.removeItem('newQueue');
+            } else {
+	            let subQueue = JSON.parse(localStorage.getItem("queue"));
+	            if(!(this.queue.length === subQueue.length)) {
+	            	this.queue = JSON.parse(localStorage.getItem("queue"));
+	            	this.currentIndex = this.queue.length - 1;
+	            }	
             }
         });
         

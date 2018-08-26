@@ -86,6 +86,7 @@ export class PlaylistDetailComponent implements OnInit {
 	
 	addPlaylistToQueue(){
     	localStorage.setItem('queue', JSON.stringify([]));
+    	localStorage.setItem('newQueue', 'true');
 		for (var i = 0; i < this.playlist['songs'].length; ++i) {
 			this.addToQueue(this.playlist['songs'][i]);
 		}

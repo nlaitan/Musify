@@ -1,0 +1,88 @@
+<div class="componente-principal-actual center-align">
+
+	<!-- OCULTO -->
+	<form id="filter" hidden>
+	    <input id="term-search" type="text">
+	    <button id="button-search" (click)="changeTerm()"></button>
+	</form>
+
+	<h5 *ngIf="termi && termi != ''"><em>Resultados para: {{ termi }}</em></h5>
+
+	<hr>
+
+	<!-- ARTISTAS -->
+	<div *ngIf="artists" class="row albums-row">
+		<h5> Artistas </h5>
+		<div class="col xl2 l3 m4 s6" *ngFor="let artist of artists | filter:termi;" >
+	        
+	        <div class="card" >
+	            <div class="card-image">
+	                <img *ngIf="artist.image != 'null'" class="image-artist" src="{{url + 'get-image-artist/' + artist.image}}">
+	            </div>
+	            <div class="card-content center-align">
+	                <span class="card-title">
+	                    <a [routerLink]="['/artista', artist._id]" matTooltip="{{ artist.name }}">
+	                        {{ artist.name }}
+	                    </a>
+	                </span>
+	                <div class="album">
+	                    <p>{{ artist.description }}</p>
+	                </div>
+	                
+	            </div>
+	        </div>
+
+	    </div>
+	</div>
+
+	<hr>
+
+	<!-- ALBUMS -->
+	<div *ngIf="albums" class="row albums-row">
+		<h5> Álbums </h5>
+		<br><br>
+    	<div class="col xl2 l3 m4 s6" *ngFor="let album of albums | filter:termi;" >
+            
+            <div class="card album-list" >
+                <div class="card-image">
+                    <img *ngIf="album.image != 'null'" class="image-artist" src="{{url + 'get-image-album/' + album.image}}">
+                    <button class="flotante z-depth-0" mat-mini-fab matTooltip="reproducir álbum">
+                        <mat-icon>play_arrow</mat-icon>
+                    </button>
+                </div>
+                <div class="card-content center-align">
+                    <span class="card-title">
+                        <a [routerLink]="['/album', album._id]" matTooltip="{{ album.title }}">
+                            {{ album.title }}
+                        </a>
+                    </span>
+                    <div class="album">
+                        <p>
+                            <a [routerLink]="['/artista', album.artist._id]">{{ album.artist.name }}</a>
+                        </p>
+                        <p>{{ album.description }}</p>
+                        <p>{{ album.year }}</p>
+                    </div>
+                    <a class="btn-floating halfway-fab transparent z-depth-0" [routerLink]="['/editar-album', album._id]" *ngIf="identity.role =='ROLE_ADMIN'" id="right-button"
+                    matTooltip="Editar">
+                        <i class="material-icons purple-text text-darken-3">edit</i>
+                    </a>
+                    <a class="btn-floating halfway-fab transparent z-depth-0" (click)="onDeleteConfirm(album._id)" *ngIf="identity.role =='ROLE_ADMIN'" id="left-button" 
+                    matTooltip="Eliminar">
+                        <i class="material-icons red-text text-darken-3">delete</i>
+                    </a>
+                    <div class="panel-confirmacion" *ngIf="confirmado == album._id">
+                        <label>¿Eliminar?</label>
+                        <div class="center-align">
+                            <button class="btn-small" *ngIf="identity.role =='ROLE_ADMIN'" (click)="onDeleteAlbum(album._id)">Si</button>
+                            <button class="btn-small"  *ngIf="identity.role =='ROLE_ADMIN'" (click)="onCancelAlbum()">No</button>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	
+
+</div>

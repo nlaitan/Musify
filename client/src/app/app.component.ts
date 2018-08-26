@@ -7,7 +7,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 //import { Http } from '@angular/http';
 import  { MatSnackBar } from '@angular/material';
 declare let $: any;
-
+import { trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -160,6 +160,16 @@ export class AppComponent implements OnInit {
             document.getElementById("image_cover").style.height = 'auto';
         }
     };
-    
+
+    search(event){
+        this._router.navigate(['/busqueda']);
+        if (document.getElementById('term-search')) {
+            document.getElementById('term-search').setAttribute('value',event.target.value);
+        }
+        if(document.getElementById("button-search")){
+            document.getElementById("button-search").click();  
+        }
+    }
+
 
 }

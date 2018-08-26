@@ -77,7 +77,7 @@ export class AlbumListComponent implements OnInit {
 						this._router.navigate(['/']);
 					} else {
 						this.albums = response['entityName'];
-						console.log(this.albums);
+						//console.log(this.albums);
 					}
 				},
 				error => {
@@ -112,6 +112,7 @@ export class AlbumListComponent implements OnInit {
 
 	playAlbum(songs){
 		localStorage.setItem('queue', JSON.stringify([]));
+		localStorage.setItem('newQueue', 'true');
 		for (var i = 0; i < songs.length; ++i) {
 			this.addToQueue(songs[i]);
 		}
@@ -142,7 +143,7 @@ export class AlbumListComponent implements OnInit {
             src: file_path,
             type: 'audio/mpeg'
         });
-		console.log(song_play);
+		//console.log(song_play);
         var subQueue = JSON.parse(localStorage.getItem("queue"));
         if(!subQueue) {
         	subQueue = [];

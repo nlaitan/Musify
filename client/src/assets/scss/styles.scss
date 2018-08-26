@@ -41,6 +41,9 @@ header, main, footer {
 .componente-principal-actual {
   padding-bottom: 230px;
   padding-left: 5px;
+  hr {
+    border: 1px solid $background-color;
+  }
 }
 
 .primary {

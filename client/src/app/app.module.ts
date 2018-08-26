@@ -9,6 +9,7 @@ import 'hammerjs';
 import 'materialize-css';
 import { MaterializeModule } from 'angular2-materialize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterPipe } from './filter.pipe';
 
 // AUDIO PLAYER
 import {VgCoreModule} from 'videogular2/core';
@@ -49,16 +50,15 @@ import { PlaylistEditComponent } from './components/playlist-edit.component';
 import { PlaylistListComponent } from './components/playlist-list.component';
 import { PlaylistDetailComponent } from './components/playlist-detail.component';
 
-
-// GENRE
-
+// SEARCH
+import { SearchComponent } from './components/search.component';
 
 import { HomeComponent } from './components/home.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, FilterPipe,
     UserEditComponent,
     // ARTIST
     ArtistListComponent, ArtistAddComponent, ArtistEditComponent, ArtistDetailComponent,
@@ -68,6 +68,8 @@ import { HomeComponent } from './components/home.component';
     SongAddComponent, SongEditComponent,
     // PLAYLIST
     PlaylistAddComponent, PlaylistEditComponent, PlaylistListComponent, PlaylistDetailComponent,
+    // SEARCH
+    SearchComponent,
 
     PlayerComponent,
     HomeComponent

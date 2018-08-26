@@ -143,6 +143,7 @@ export class AlbumDetailComponent implements OnInit {
 
 	addAlbumToQueue(){
     	localStorage.setItem('queue', JSON.stringify([]));
+    	localStorage.setItem('newQueue', 'true');
 		for (var i = 0; i < this.songs.length; ++i) {
 			this.addToQueue(this.songs[i]);
 		}

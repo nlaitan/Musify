@@ -76,12 +76,13 @@
                     Abrir menú
                 </button>
 
+                <!-- BUSQUEDA -->
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
                         <nav class="grey darken-3 z-depth-0">
-                            <form>
+                            <form id="filter">
                                 <div class="input-field">
-                                    <input id="search" class="search-nav" type="search" placeholder="Buscar" required>
+                                    <input id="search" class="search-nav" type="search" placeholder="Buscar" (input)="search($event)">
                                     <label class="label-icon" for="search">
                                         <i class="material-icons">search</i>
                                     </label>
@@ -90,7 +91,8 @@
                             </form>
                         </nav>
                     </li>
-                </ul>   
+                </ul>
+
             </div>
         </nav>
 
