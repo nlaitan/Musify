@@ -1,5 +1,8 @@
-WebApp SPA de reproducción de música -similar a Spotify-, con la posibilidad de añadir artistas, álbums, canciones y permitiendo el registro de usuarios con distintos roles.
+WebApp SPA de reproducción de música -similar a Spotify-.
 
-Desarrollado con Angular 6, NodeJS, MongoDB, ExpressJS, SASS, MaterializeCSS y Material Design.
+Permite añadir artistas, álbums, playlists, canciones y el registro de usuarios con distintos roles.
+Contiene una cola de reproduccion en su reproductor.
+
+Desarrollado con Angular 6, NodeJS, MongoDB, ExpressJS, SASS, Materialize, Material Design y Videogular2.
 
 Pronto subiré capturas de pantalla.
