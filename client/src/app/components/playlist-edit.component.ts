@@ -61,13 +61,11 @@ export class PlaylistEditComponent implements OnInit {
 							[], this.filesToUpload, this.token, 'image'
 						).then(
 							(result) => {
-								// redeirigir a playlist-detail
-								//this._router.navigate(['/playlist', response['entityName'].id]);
+								this._router.navigate(['/playlist', response['entityName']._id]);
 								this.app.openSnackBar('Playlist editada correctamente', '', 'green-snackbar');
 							},
 							(error) => {
-								// redeirigir a playlist-detail
-								//this._router.navigate(['/playlist', response['entityName'].id]);
+								this._router.navigate(['/playlist', response['entityName']._id]);
 								this.app.openSnackBar('Playlist editada correctamente (sin imagen)', '', 'green-snackbar');
 							}
 						);

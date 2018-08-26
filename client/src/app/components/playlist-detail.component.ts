@@ -8,6 +8,13 @@ import { AppComponent } from '../app.component';
 import { Playlist } from '../models/playlist';
 import { Song } from '../models/song';
 
+export interface IMedia {
+    id: string;
+    name: string;
+    artist: string;
+    src: string;
+    type: string;
+}
 
 @Component({
 	selector: 'playlist-detail',
@@ -76,12 +83,43 @@ export class PlaylistDetailComponent implements OnInit {
             }
 		);
 	}
-
 	
+	addPlaylistToQueue(){
+    	localStorage.setItem('queue', JSON.stringify([]));
+		for (var i = 0; i < this.playlist['songs'].length; ++i) {
+			this.addToQueue(this.playlist['songs'][i]);
+		}
+		this.basicStartPlayer(this.playlist['songs'][0]);
+	}
+
+	addToQueue(song){
+		let file_path = this.url + 'get-song-file/' + song.file;
+		var song_play : IMedia = ({
+            id: song._id,
+            name: song.name,
+            artist: song.album.artist.name,
+            src: file_path,
+            type: 'audio/mpeg'
+        });
+
+        var subQueue = JSON.parse(localStorage.getItem("queue"));
+        if(!subQueue) {
+        	subQueue = [];
+        }
+    	subQueue.push(song_play);
+    	localStorage.setItem('queue', JSON.stringify(subQueue));
+	}
+
 	startPlayer(song){
+		this.basicStartPlayer(song);
+		this.addToQueue(song);
+	}
+
+	basicStartPlayer(song){
 		let song_player = JSON.stringify(song);
 		let file_path = this.url + 'get-song-file/' + song.file;
 		let image_path = this.url + 'get-image-album/' + song.album.image;
+		
 		localStorage.setItem('sound_song', song_player );
 		document.getElementById("audio_source").setAttribute("src", file_path);
 		(document.getElementById("myAudio") as any).load();
@@ -91,5 +129,5 @@ export class PlaylistDetailComponent implements OnInit {
 		document.getElementById("play-image-album").setAttribute("src", image_path);
 
 	}
-	
+
 }

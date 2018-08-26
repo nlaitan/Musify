@@ -1,9 +1,10 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AlbumService } from '../services/album.service';
 import { SongService } from '../services/song.service';
 import { UploadService } from '../services/upload.service';
+import { VgAPI } from 'videogular2/core';
 
 import { GLOBAL } from '../services/global';
 import { AppComponent } from '../app.component';
@@ -27,8 +28,9 @@ export class SongEditComponent implements OnInit {
 	public album: Album;
 	public is_edit;
 	public filesToUpload: Array<File>;
-	public filesrc;
+	public audio_duration;
 	public audiosrc;
+	public api: VgAPI;
 	public audiotype = "audio/mpeg";
 
 	constructor(
@@ -45,7 +47,7 @@ export class SongEditComponent implements OnInit {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
-		this.song = new Song(1,'','','','','');
+		this.song = new Song('','','','','');
 		this.is_edit = true;
 		
 	}
@@ -53,6 +55,7 @@ export class SongEditComponent implements OnInit {
 	ngOnInit(){
 		console.log('song-edit.component funcionando');
 		this.getSong();
+		//this.getDuration();
 	}
 
 	onSubmit(){
@@ -62,14 +65,12 @@ export class SongEditComponent implements OnInit {
 
 			this._songService.editSong(this.token, id, this.song).subscribe(
 				response => {
-					console.log(response);
+					//console.log(response);
 					if(!response['entityName']){
 						console.log('Error en el servidor');
 					} else {
-						//this.song = response['entityName'];
-						//this._router.navigate(['/album/', response['entityName']._id]);
 						if (!this.filesToUpload){
-							this._router.navigate(['/editar-cancion', response['entityName']._id]);
+							this._router.navigate(['/album', response['entityName'].album]);
 							this.app.openSnackBar('Canción editada (sin audio subido)', '', 'green-snackbar');	
 						} else {
 							this._uploadService.makeFileRequest(
@@ -77,22 +78,19 @@ export class SongEditComponent implements OnInit {
 								[], this.filesToUpload, this.token, 'file'
 							).then(
 								(result) => {
-									this._router.navigate(['/editar-cancion', response['entityName']._id]);	
+									this._router.navigate(['/album', response['entityName'].album]);	
 									this.app.openSnackBar('Canción editada correctamente', '', 'green-snackbar');
 								},
 								(error) => {
-									//this._router.navigate(['/artista', response['entityName'].artist]);
 									console.log(error);
 								}
 							);							
 						}
 	
-						//this.app.openSnackBar('Canción editada!', '', 'green-snackbar');
 					}
 				},
 				error => {
 	                if(error != null){
-	                    //this.errorMessage = error.error.message;
 	                    console.log(error.error.message);
 	                }
 	            }	
@@ -115,7 +113,6 @@ export class SongEditComponent implements OnInit {
 					} else {
 						this.audiosrc = this.url + 'get-song-file/' + response['entityName'].file;
 						this.song = response['entityName'];
-						//this._router.navigate(['/editar-album/', response['entityName']._id])	
 					}
 				},
 				error => {
@@ -125,6 +122,21 @@ export class SongEditComponent implements OnInit {
 	            }
 	        )
 		});
+	}
+
+	getAudioDuration(time){
+		var minutes = Math.floor(time / 60000);
+		var seconds = Math.floor((time % 60000) / 1000).toFixed(0);
+		var finalTime = minutes + ":" + (parseInt(seconds,10) < 10 ? '0' : '') + seconds;
+		return finalTime;
+	}
+
+	onPlayerReady(api:VgAPI){
+		document.getElementById("songEditSrc").setAttribute("src", this.audiosrc);
+		this.api = api;
+		this.api.getDefaultMedia().subscriptions.loadedMetadata.subscribe(() => {
+			this.song['duration'] = this.getAudioDuration(this.api.time.total);
+	    });	
 	}
 
 }

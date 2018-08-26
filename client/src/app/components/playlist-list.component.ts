@@ -52,7 +52,7 @@ export class PlaylistListComponent implements OnInit {
 						this._router.navigate(['/']);
 					} else {
 						this.playlists = response['entityName'];
-						console.log(this.playlists);
+						//console.log(this.playlists);
 					}
 				},
 				error => {

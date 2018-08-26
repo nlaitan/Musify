@@ -1,6 +1,14 @@
 <div class="componente-principal-actual">
     <div *ngIf="artist" class="row">
-    	
+    	<div class="row" style="margin: 8px 0 5px 0;">
+            <div class="nav-wrapper">
+                <div class="col s12 breadcrumbs">
+                    <button mat-mini-fab  [routerLink]="['/artistas', 1]">
+                        <mat-icon>arrow_back</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
         <div class="card horizontal">
             <div class="card-image">
                 <img src="{{url + 'get-image-artist/' + artist.image}}" >
@@ -16,7 +24,7 @@
         </div>
         
     	<button mat-flat-button [routerLink]="['/crear-album', artist._id]" 
-    	*ngIf="identity.role =='ROLE_ADMIN'" style="margin-left: 10px;">
+    	*ngIf="identity.role =='ROLE_ADMIN'" style="margin: 0px 10px 10px 0px;">
     		<mat-icon aria-label="album">edit</mat-icon>
     		Añadir álbum
     	</button>
@@ -36,9 +44,6 @@
                         </a>
                     </span>
                     <div class="album">
-                        <p>
-                            <a [routerLink]="['/artista', album.artist._id]">{{ album.artist.name }}</a>
-                        </p>
                         <p>{{ album.description }}</p>
                         <p>{{ album.year }}</p>
                     </div>

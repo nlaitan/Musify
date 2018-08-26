@@ -58,12 +58,11 @@ function getPlaylists(req,res){
         (find = Playlist.find({}).sort('title')) :
         (find = Playlist.find({user: userId}).sort('title'));
     
-    find.populate({path: 'user'}).exec((err, playlists) => {
+    find.populate({path: 'user', select: 'name lastname'}).exec((err, playlists) => {
         Utils.checkErrors(err, res, playlists, 'listar', 'playlists')
     });
     
 }
-
 
 function updatePlaylist(req,res){
     var playlistId = req.params.id;
@@ -88,7 +87,8 @@ function deletePlaylist(req,res){
 
 function addSong(req,res){
     var playlistId = req.params.id;     // Bien recibido
-    var songId = req.body.song;         // Bien recibido
+    var songId = req.body._id;
+    console.log('adding song: ' + songId);        
     Playlist.findByIdAndUpdate(playlistId, 
         {$push: {songs: songId}},       // $push inserta un elemento en el array de songs
         function(err, playlist) {
@@ -102,7 +102,7 @@ function addSong(req,res){
 function deleteSong(req,res){
     var playlistId = req.params.id;    
     var songId = req.body._id;
-    console.log('songId: ' + songId);
+    console.log('deleting song: ' + songId);
     Playlist.findByIdAndUpdate(playlistId, 
         {$pull: {songs: songId}},       // $pull quita un elemento del array de songs
         function(err, playlist) {

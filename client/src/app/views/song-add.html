@@ -6,14 +6,14 @@
 		
 		<div class="row">
 			<div class="col l4 m6 s12 offset-l4 offset-m3">
-
+				<!--
 				<div class="input-field" >
 			        <label class="active" for="number">Número</label>
 			        <input #number="ngModel" [(ngModel)]="song.number" name="number" type="number" 
-			        class="validate" id="number" required placeholder="Número" />
+			        class="validate" id="number" placeholder="Número" />
 			        <span class="helper-text" data-error="El número es obligatorio"></span>
 			    </div>
-
+				-->
 				<div class="input-field" >
 			        <label class="active" for="title">Título</label>
 			        <input #name="ngModel" [(ngModel)]="song.name" name="name" type="text" 
@@ -21,10 +21,10 @@
 			        <span class="helper-text" data-error="El título es obligatorio"></span>
 			    </div>
 
-				<div class="input-field" >
+				<div class="input-field" *ngIf="is_edit">
 			        <label class="active" for="duration">Duración</label>
 			        <input #duration="ngModel" [(ngModel)]="song.duration" name="duration" type="text"
-			        class="validate" id="duration" required placeholder="Duración" />
+			        class="validate" id="duration" placeholder="Duración" />
 			        <span class="helper-text" data-error="La duración es obligatoria"></span>
 			    </div>
 
@@ -39,7 +39,8 @@
 		            </div>
 		        </div>
 
-				<vg-player style="height: 50px;" *ngIf="song.file && song.file != 'null'">
+				<vg-player (onPlayerReady)="onPlayerReady($event)" 
+				style="height: 50px;" *ngIf="song.file && song.file != 'null'">
 				    <vg-controls>
 				        <vg-play-pause></vg-play-pause>
 				        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
@@ -47,13 +48,13 @@
 				            <vg-scrub-bar-current-time [vgSlider]="true"></vg-scrub-bar-current-time>
 				            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
 				        </vg-scrub-bar>
-				        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-				        <!--<vg-volume [vgFor]="myAudio"></vg-volume>-->
+				        <vg-time-display vgProperty="total" vgFormat="mm:ss" id="audio_duration" >
+				        </vg-time-display>
 				        <vg-mute></vg-mute>
 				    </vg-controls>
 
-				    <audio #media [vgMedia]="media" id="myAudio" preload="auto">
-				        <source [src]="audiosrc" type="audio/mpeg">
+				    <audio #media [vgMedia]="media" id="myAudioSmall" preload="auto">
+				        <source src="" type="audio/mpeg" id="songEditSrc" >
 				    </audio>
 				</vg-player>
 
@@ -63,7 +64,8 @@
 	    <div class="row center-align">
 	    	<button mat-raised-button color="primary" value="{{titulo}}" type="submit" 
 	    	[disabled]="!formSong.form.valid" >
-	        	Crear canción
+	        	<div *ngIf="!is_edit">Previsualizar</div>
+	        	<div *ngIf="is_edit">Finalizar</div>
 	    	</button>
 		</div>
 

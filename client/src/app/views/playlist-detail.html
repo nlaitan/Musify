@@ -1,7 +1,16 @@
 <div class="componente-principal-actual">
     <div *ngIf="playlist" class="row" >
+        <div class="row" style="margin: 8px 0 5px 0;">
+            <div class="nav-wrapper">
+                <div class="col s12 breadcrumbs">
+                    <button mat-mini-fab  [routerLink]="['/playlists', identity._id]">
+                        <mat-icon>arrow_back</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
         <!-- INFORMACIÓN DE LA PLAYLIST -->
-        <div class="col xl4 l6 m8 s12 offset-l3 offset-m2 left">
+        <div class="col xl4 l6 m8 s12 offset-l3 offset-m2 left center-align">
             <div  class="card horizontal album-card">
                 <div class="card-image">
                     <img src="{{url + 'get-image-playlist/' + playlist.image}}" >
@@ -25,13 +34,11 @@
                         </div>  
                     </div>
                 </div>
-            </div>
-            <!--
-            <div class="center-align">
-                <button [routerLink]="['/crear-cancion', album._id]" mat-raised-button color="primary"
-                style="margin-top: 10px;" >Agregar canción</button>
-            </div>
-        	-->
+            </div> 
+            <br>   
+            <button mat-stroked-button color="basic" (click)="addPlaylistToQueue()">
+                Reproducir playlist
+            </button>
         </div>
 
         <!-- LISTADO DE CANCIONES -->
@@ -46,9 +53,6 @@
                             <th>Atista</th>
                             <th>Duración</th>
                             <th></th>
-                            <!--
-                            <th *ngIf="identity.role =='ROLE_ADMIN'">Acción</th>
-                        	-->
                         </tr>
                     </thead>
 
@@ -68,7 +72,9 @@
                                     <mat-icon>more_horiz</mat-icon>
                                 </button>
                                 <mat-menu #menu="matMenu">
-                                    <button mat-menu-item>Ir al álbum</button>
+                                    <button mat-menu-item [routerLink]="['/album', song.album._id]">
+                                        Ir al álbum
+                                    </button>
                                     <button mat-menu-item *ngIf="playlist.user._id == identity._id"
                                     (click)="deleteSong(song)" >
                                         Eliminar de esta playlist

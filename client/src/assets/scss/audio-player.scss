@@ -23,6 +23,55 @@ vg-player {
 	}
 }
 
+
+
+.queue{
+	position: fixed;
+	min-height: 150px;
+	max-height: 350px;
+	width: 400px;
+	bottom: 90px;
+	margin-left: 20px;
+	padding: 5px 5px 5px 10px;
+	background-color: darken($background-color-dark, 2%);
+    box-shadow: 2px -2px 5px 0px black;
+	float: right;
+	z-index: 100;
+	overflow-y: scroll;
+    box-sizing: content-box;
+    .topper {
+    	height: 10px; 
+    	position: fixed; 
+    	margin-top: -5px;	
+		width: 400px; 
+		background-color: darken($background-color-dark, 2%);
+    }
+	ul li {
+		cursor: pointer;
+		border-bottom: 1px solid $background-color-dark;
+		&.selected {
+			background-color: darken($background-color-very-dark, 8%);
+		}
+		&:hover {
+			background-color: $background-color-dark;
+		}
+	}
+	button {
+		&.mat-mini-fab.mat-accent {
+			border-radius: 2px;
+			position: fixed;
+			z-index: 400;
+			background-color: darken($background-color-dark, 5%);
+			&.sombra {
+				box-shadow: -1px 1px 2px 0px black;
+			}
+			&:hover {
+				background-color: $background-color-dark;
+			}	
+		}	
+	}
+}
+
 .player {
 	background-color: $background-color-very-dark;
 	position: fixed;
@@ -32,10 +81,16 @@ vg-player {
 	display: flex;
 	z-index: 2000;
     box-shadow: 0px -2px 5px 0px black;
-	img {
-		height: 90px;
-		overflow: hidden;
-	}
+    .album-image {
+    	z-index: 2000;
+    	img {
+			height: 90px;
+			overflow: hidden;
+			width: 90px;
+			object-fit: cover;
+			z-index: 2000;
+		}
+    }
 	.song-info {
 		position: absolute;
 		height: 16px;
@@ -75,6 +130,26 @@ vg-player {
 				&:hover {
 					background-color: darken($background-color-very-dark, 3%);
 					border: 1px solid white;
+				}
+			}
+			button {
+				top: 18px;
+				height: 30px;
+				border-radius: 10px;
+				position: absolute;
+				background-color: darken($background-color-very-dark,1%);
+				border: 1px solid $background-color;
+				span {
+					height: 28px;
+					padding: 0;
+					line-height: 28px;
+					mat-icon {
+						height: 32px;
+					}
+				}
+				&.next {
+					border: 0px;
+					background-color: transparent;
 				}
 			}
 			vg-time-display { 

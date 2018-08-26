@@ -13,7 +13,9 @@ var Song = require('../models/song');
 function getSong(req,res){
     
     var songId = req.params.id;
-    Song.findById(songId).populate({path: 'album'}).exec((err,song)=>{
+    Song.findById(songId).populate({
+        path: 'album', populate: { path: 'artist'}
+    }).exec((err,song)=>{
         Utils.checkErrors(err,res,song,'obtener','canción');
     });
     
@@ -24,7 +26,7 @@ function saveSong(req,res){
     var song = new Song();
     var params = req.body;
     
-    song.number = params.number;
+    //song.number = params.number;
     song.name = params.name;
     song.duration = params.duration;
     song.file = 'null';
@@ -41,7 +43,7 @@ function getSongs(req,res){
     var albumId = req.params.album;
     
     if(!albumId){
-        var find = Song.find({}).sort('number');
+        var find = Song.find({}).sort('name');
     } else {
         var find = Song.find({album: albumId}).sort('name');    
     }

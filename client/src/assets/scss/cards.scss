@@ -93,7 +93,7 @@
     }
   }
   &.album-list {
-    margin-top: 28px;
+    margin-top: -18px;
     .card-image {
         @media all and (min-width: 2000px) {
           margin-bottom: -75px;  
@@ -107,6 +107,23 @@
         @media all and (max-width: 600px) {
           margin-bottom: -75px;
         }
+        .flotante {
+          top: -215px;
+          float: left;
+          background-color: rgba(0, 0, 0, 0.3);;
+          color: white;
+          text-shadow: 0px 0px 15px black;
+          span {
+            padding: 0px;
+            line-height: 32px;
+            mat-icon {
+              font-size: 32px;
+              height: 32px;
+              width: 32px;
+              
+            }
+          }
+        }
     }
     .card-content {
         height: 85px;
@@ -116,6 +133,13 @@
     }
   }
   &.playlist-card {
+    .card-image {
+      .image-artist.default {
+        background-color: $primary-color-dark; 
+        object-fit: none;
+        padding-bottom: 30px;
+      }
+    }
     .card-content {
       padding-top: 5px;
     }

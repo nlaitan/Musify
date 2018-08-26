@@ -1,5 +1,5 @@
 <div class="componente-principal-actual">
-	<div class="head-page" *ngIf="identity">
+	<div class="head-page" *ngIf="identity" style="margin-bottom: 22px;">
 		<label class="list-title">
 			{{ titulo }} 
 		</label>
@@ -21,12 +21,22 @@
             <div class="card album-list" >
                 <div class="card-image">
                     <img *ngIf="album.image != 'null'" class="image-artist" src="{{url + 'get-image-album/' + album.image}}">
+                    <button class="flotante z-depth-0" mat-mini-fab (click)="getAndPlayAlbum(album._id)" matTooltip="reproducir álbum">
+                        <mat-icon>play_arrow</mat-icon>
+                    </button>
                 </div>
                 <div class="card-content center-align">
                     <span class="card-title">
+                        <!-- DESCOMENTAR LUEGO
+                        <a (click)="getAndPlayAlbum(album._id)" matTooltip="{{ album.title }}"
+                        style="cursor: pointer;">
+                            {{ album.title }}
+                        </a>
+                        -->
                         <a [routerLink]="['/album', album._id]" matTooltip="{{ album.title }}">
                             {{ album.title }}
                         </a>
+                        
                     </span>
                     <div class="album">
                         <p>

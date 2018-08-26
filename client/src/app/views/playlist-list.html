@@ -14,6 +14,7 @@
             <div class="card playlist-card" >
                 <div class="card-image">
                     <img *ngIf="playlist.image != 'null'" class="image-artist" src="{{url + 'get-image-playlist/' + playlist.image}}">
+                    <img *ngIf="playlist.image == 'null'" class="image-artist default" src="../assets/img/album-whitex64.png"/>
                 </div>
                 <div class="card-content center-align">
                     <span class="card-title">

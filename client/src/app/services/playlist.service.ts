@@ -69,8 +69,8 @@ export class PlaylistService {
       return this._http.delete(this.url + 'playlist/' + id, options).pipe(map(res => res));
     }
 
-    addSong(token, id: string, playlist: Playlist){
-      let params = JSON.stringify(playlist);
+    addSong(token, song: Song, playlist_id){
+      let params = JSON.stringify(song);
       const options = { 
           headers: new HttpHeaders({
              'Content-Type':'application/json',
@@ -78,7 +78,7 @@ export class PlaylistService {
           })
       };
 
-      return this._http.put(this.url + 'add-song-playlist/' + id, params, options).pipe(map(res => res));
+      return this._http.put(this.url + 'add-song-playlist/' + playlist_id, params, options).pipe(map(res => res));
     }
 
     deleteSong(token, song: Song, playlist: Playlist){

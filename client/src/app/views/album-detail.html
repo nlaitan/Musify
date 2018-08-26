@@ -1,5 +1,16 @@
 <div class="componente-principal-actual">
+    
     <div *ngIf="album" class="row" >
+        <div class="row" style="margin: 8px 0 5px 0;">
+            <div class="nav-wrapper">
+                <div class="col s12 breadcrumbs">
+                    <a [routerLink]="['/artistas', 1]"  class="breadcrumb">Artistas</a>
+                    <a [routerLink]="['/artista', album.artist._id]" class="breadcrumb">
+                        {{ album.artist.name }}
+                    </a>
+                </div>
+            </div>
+        </div>
         <!-- INFORMACIÓN DEL ÁLBUM -->
         <div class="col xl4 l6 m8 s12 offset-l3 offset-m2 left">
             <div  class="card horizontal album-card">
@@ -31,8 +42,14 @@
                 </div>
             </div>
             <div class="center-align">
-                <button [routerLink]="['/crear-cancion', album._id]" mat-raised-button color="primary"
-                style="margin-top: 10px;" >Agregar canción</button>
+                <button [routerLink]="['/crear-cancion', album._id]" mat-raised-button 
+                color="primary" style="margin-top: 10px;" >
+                    Agregar canción
+                </button>
+                <br><br>
+                <button mat-stroked-button color="basic" (click)="addAlbumToQueue()">
+                    Reproducir álbum
+                </button>
             </div>
         </div>
 
@@ -46,29 +63,46 @@
                             <th></th>
                             <th>N°</th>
                             <th>Nombre</th>
-                            <th>Duración</th>
-                            <th *ngIf="identity.role =='ROLE_ADMIN'">Acción</th>
+                            <th class="center-align">Duración</th>
+                            <th></th>
                         </tr>
                     </thead>
 
-                    <tbody *ngFor="let song of songs">
+                    <tbody *ngFor="let song of songs; let i = index">
                         <tr>
                             <td class="button_play">
                                 <a (click)="startPlayer(song)">
                                     <mat-icon>play_arrow</mat-icon>
                                 </a>
                             </td>
-                            <td>{{ song.number }}</td>
+                            <td>{{ i+1 }}</td>
                             <td>{{ song.name }}</td>
-                            <td>{{ song.duration }}</td>
-                            <td *ngIf="identity.role =='ROLE_ADMIN'">
-                                <a [routerLink]="['/editar-cancion', song._id]" 
-                                matTooltip="Editar canción">
-                                    <mat-icon color="primary">edit</mat-icon>
-                                </a>
-                                <a (click)="onDeleteConfirm(song._id)">
-                                    <mat-icon color="warn">delete</mat-icon>
-                                </a>
+                            <td class="center-align">{{ song.duration }}</td>
+                            <td style="width: 40px">
+                                <button mat-mini-fab [matMenuTriggerFor]="menu" 
+                                class="transparent z-depth-0">
+                                    <mat-icon>more_horiz</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item [routerLink]="['/editar-cancion', song._id]">
+                                        Editar canción
+                                    </button>
+                                    <button mat-menu-item *ngIf="identity.role == 'ROLE_ADMIN'"
+                                    (click)="onDeleteConfirm(song._id)" >
+                                        Eliminar canción
+                                    </button>
+
+                                    <button mat-menu-item [matMenuTriggerFor]="playlistsMenu" >
+                                        Agregar a playlist
+                                    </button>                                    
+                                    <mat-menu #playlistsMenu="matMenu">
+                                        <button mat-menu-item *ngFor="let playlist of playlists"
+                                        (click)="addSongToPlaylist(playlist._id, song)">
+                                            {{ playlist.title }}
+                                        </button>
+                                    </mat-menu>
+
+                                </mat-menu>
                                 <div class="panel-confirmacion-cancion" *ngIf="confirmado == song._id">
                                     <p><strong>¿Eliminar?</strong></p>
                                     <button class="waves-effect waves-light btn-flat white-text" *ngIf="identity.role =='ROLE_ADMIN'" 

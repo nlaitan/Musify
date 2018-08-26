@@ -3,21 +3,28 @@ import { Router, ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AlbumService } from '../services/album.service';
 import { SongService } from '../services/song.service';
+import { PlaylistService } from '../services/playlist.service';
 import { GLOBAL } from '../services/global';
 import { AppComponent } from '../app.component';
-import { Artist } from '../models/artist';
+import { PlayerComponent } from './player.component';
+//import { Artist } from '../models/artist';
 import { Album } from '../models/album';
 import { Song } from '../models/song';
+import { Playlist } from '../models/playlist';
 
-export interface DialogData {
-  animal: string;
-  name: string;
+
+export interface IMedia {
+    id: string;
+    name: string;
+    artist: string;
+    src: string;
+    type: string;
 }
 
 @Component({
 	selector: 'album-detail',
 	templateUrl: '../views/album-detail.html',
-	providers: [ UserService, AlbumService, SongService ]
+	providers: [ UserService, AlbumService, SongService, PlaylistService, PlayerComponent ]
 })
 
 export class AlbumDetailComponent implements OnInit {
@@ -27,6 +34,7 @@ export class AlbumDetailComponent implements OnInit {
 	public url: string;
 	public errorMessage;
 	public albums: Album[];
+	public playlists: Playlist[];
 	public songs: Song[];
 	public confirmado;
 
@@ -36,7 +44,9 @@ export class AlbumDetailComponent implements OnInit {
 		private _userService: UserService,
 		private _albumService: AlbumService,
 		private _songService: SongService,
-        public app: AppComponent
+		private _playlistService: PlaylistService,
+        public app: AppComponent,
+        public player: PlayerComponent
 	){
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
@@ -45,6 +55,7 @@ export class AlbumDetailComponent implements OnInit {
 
 	ngOnInit(){
 		this.getAlbum();
+		this.getPlaylists();
 	}
 
 	getAlbum(){
@@ -112,9 +123,39 @@ export class AlbumDetailComponent implements OnInit {
 		);
 	}
 
+	addToQueue(song){
+		let file_path = this.url + 'get-song-file/' + song.file;
+		var song_play : IMedia = ({
+            id: song._id,
+            name: song.name,
+            artist: song.album.artist.name,
+            src: file_path,
+            type: 'audio/mpeg'
+        });
+
+        var subQueue = JSON.parse(localStorage.getItem("queue"));
+        if(!subQueue) {
+        	subQueue = [];
+        }
+    	subQueue.push(song_play);
+    	localStorage.setItem('queue', JSON.stringify(subQueue));
+	}
+
+	addAlbumToQueue(){
+    	localStorage.setItem('queue', JSON.stringify([]));
+		for (var i = 0; i < this.songs.length; ++i) {
+			this.addToQueue(this.songs[i]);
+		}
+		this.basicStartPlayer(this.songs[0]);
+	}
+
 	startPlayer(song){
+		this.basicStartPlayer(song);
+		this.addToQueue(song);
+	}
+
+	basicStartPlayer(song){
 		let song_player = JSON.stringify(song);
-		//console.log(song);
 		let file_path = this.url + 'get-song-file/' + song.file;
 		let image_path = this.url + 'get-image-album/' + song.album.image;
 		
@@ -126,6 +167,42 @@ export class AlbumDetailComponent implements OnInit {
 		document.getElementById("song-title").innerHTML = (song.album.artist.name + ' - ' + song.name);
 		document.getElementById("play-image-album").setAttribute("src", image_path);
 
+	}
+
+	getPlaylists(){
+		this._route.params.forEach((params: Params) => {
+			var myId = this.identity._id;
+			this._playlistService.getPlaylists(this.token, myId).subscribe(
+				response => {
+					if(!response['entityName']) {
+						this._router.navigate(['/']);
+					} else {
+						this.playlists = response['entityName'];
+					}
+				},
+				error => {
+	                if(error != null){
+	                    console.log(error.error.message);
+	                }
+	            }
+			); 
+
+		});
+	}
+
+	addSongToPlaylist(playlist_id, song){
+
+		this._playlistService.addSong(this.token, song, playlist_id).subscribe(
+			response => {
+				this.getPlaylists();
+			},
+			error => {
+                if(error != null){
+                    console.log(error);
+                }
+            }
+		);
+	
 	}
 
 }

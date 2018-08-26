@@ -30,9 +30,9 @@ table {
 				}
 				.panel-confirmacion-cancion {
 					margin-top: -40px;
-					margin-left: -10px;
+					right: 10px;
 					position: absolute;
-					float: right;
+					z-index: 200;
 					text-align: center;
 					background-color: $background-color-very-dark;
 					button {

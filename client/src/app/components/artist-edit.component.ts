@@ -48,10 +48,10 @@ export class ArtistEditComponent implements OnInit {
 			let id = params['id'];
 			this._artistService.getArtist(this.token, id).subscribe(
 				response => {
-					if(!response['entityName']) {
+					if(!response['artist']) {
 						this._router.navigate(['/']);
 					} else {
-						this.artist = response['entityName'];
+						this.artist = response['artist'];
 						console.log(this.artist);	
 					}
 				},

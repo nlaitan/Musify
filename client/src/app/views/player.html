@@ -1,6 +1,23 @@
 <div class="row">
+	
 	<div class="player">
-
+		<div class="queue" id="queue" [@stateAnimation]='state'>
+			<div class="right" style="margin-right: 40px;">
+				<button mat-mini-fab class="sombra" (click)="closeQueue()">
+					<mat-icon>close</mat-icon>
+				</button>
+			</div>
+			<div class="topper">
+			</div>
+			<ul>
+			    <li *ngFor="let item of queue; let $i = index"
+			        (click)="onClickPlaylistItem(item, $i)"
+			        [class.selected]="item === currentItem">
+			        {{ item.artist }} - {{ item.name }}
+			    </li>
+			</ul>
+		</div>
+		
 		<div class="album-image hide-on-small-only">
 			<span *ngIf="song.album">
 				<img id="play-image-album" src="{{ url + 'get-image-album/' + song.album.image }}" />
@@ -19,9 +36,30 @@
 			</label>
 		</div>
 
-		<vg-player [style]="getPlayerStyle()" class="player-principal">
+		<vg-player [style]="getPlayerStyle()" class="player-principal" 
+		(onPlayerReady)="onPlayerReady($event)">
 		    <vg-controls>
-		        <vg-play-pause [style]="getPlayButtonStyle()"></vg-play-pause>
+		        <vg-play-pause [style]="getButtonStyle(43)">
+		        </vg-play-pause>
+		        
+		        <button class="z-depth-0" mat-mini-fab matTooltip="ver cola de reproducción"
+		        [style]="getButtonStyle(200)" (click)="openQueue()" id="view-queue">
+		        	<mat-icon>list</mat-icon>
+		        </button>
+
+		        <button class="z-depth-0" mat-mini-fab matTooltip="vaciar cola de reproducción"
+		        [style]="getButtonStyle(260)" (click)="emptyQueue()" id="empty-queue">
+		        	<mat-icon>delete_sweep</mat-icon>
+		        </button>
+		        
+				<button class="z-depth-0 next" mat-mini-fab [style]="getButtonStyle(-8)" (click)="prevSong()" >
+		        	<mat-icon>skip_previous</mat-icon>
+		        </button>
+
+		        <button class="z-depth-0 next" mat-mini-fab [style]="getButtonStyle(106)" (click)="nextSong()">
+		        	<mat-icon>skip_next</mat-icon>
+		        </button>
+
 		        <vg-time-display class="hide-on-small-only" vgProperty="current" vgFormat="mm:ss"></vg-time-display>
 		        <vg-scrub-bar [vgSlider]="true" id="scrub-bar-width">
 		            <vg-scrub-bar-current-time [vgSlider]="true">
@@ -34,7 +72,7 @@
 		    </vg-controls>
 
 		    <audio #media [vgMedia]="media" id="myAudio" preload="auto">
-		        <source type="audio/mpeg" id="audio_source">
+		        <source	type="audio/mpeg" id="audio_source" [src]="audiosrc" >
 		    </audio>
 		</vg-player>
 			

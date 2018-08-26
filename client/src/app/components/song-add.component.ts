@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AlbumService } from '../services/album.service';
 import { SongService } from '../services/song.service';
+import { UploadService } from '../services/upload.service';
 
 import { GLOBAL } from '../services/global';
 import { AppComponent } from '../app.component';
@@ -15,7 +16,7 @@ import { Song } from '../models/song';
 @Component({
 	selector: 'song-add',
 	templateUrl: '../views/song-add.html',
-	providers: [ UserService, AlbumService, SongService ]
+	providers: [ UserService, AlbumService, SongService, UploadService ]
 })
 
 export class SongAddComponent implements OnInit {
@@ -25,6 +26,7 @@ export class SongAddComponent implements OnInit {
 	public token;
 	public url: string;
 	public errorMessage;
+	public filesToUpload: Array<File>;
 	public album: Album;
 
 	constructor(
@@ -33,6 +35,7 @@ export class SongAddComponent implements OnInit {
 		private _userService: UserService,
 		private _albumService: AlbumService,
 		private _songService: SongService,
+		private _uploadService: UploadService,
 
         public app: AppComponent
 	){
@@ -40,7 +43,7 @@ export class SongAddComponent implements OnInit {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
-		this.song = new Song(1,'','','','','');
+		this.song = new Song('','','','','');
 		
 	}
 
@@ -57,14 +60,26 @@ export class SongAddComponent implements OnInit {
 
 			this._songService.addSong(this.token, this.song).subscribe(
 				response => {
-					//console.log(response);
 					if(!response['entityName']){
-						this.errorMessage = 'Error en el servidor';
-						console.log(this.errorMessage);
+						console.log('Error en el servidor');
 					} else {
-						this.song = response['entityName'];
-						this._router.navigate(['/editar-cancion', response['entityName']._id]);	
-						this.app.openSnackBar('Canción creada correctamente', '', 'green-snackbar');
+						if (!this.filesToUpload){
+							this._router.navigate(['/editar-cancion', response['entityName']._id]);
+							this.app.openSnackBar('Canción guardada (sin audio subido)', '', 'green-snackbar');	
+						} else {
+							this._uploadService.makeFileRequest(
+								this.url + 'upload-file-song/' + response['entityName']._id, 
+								[], this.filesToUpload, this.token, 'file'
+							).then(
+								(result) => {		
+									this._router.navigate(['/editar-cancion', response['entityName']._id]);		
+									this.app.openSnackBar('Canción guardada correctamente', '', 'green-snackbar');
+								},
+								(error) => {
+									console.log(error);
+								}
+							);						
+						}	
 					}
 				},
 				error => {
@@ -97,5 +112,9 @@ export class SongAddComponent implements OnInit {
 	        )
 		});
 	}
+
+	fileChangeEvent(fileInput: any){
+        this.filesToUpload = <Array<File>>fileInput.target.files;
+    }
 
 }
