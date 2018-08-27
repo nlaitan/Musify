@@ -8,12 +8,76 @@
 
 	<h5 *ngIf="termi && termi != ''"><em>Resultados para: {{ termi }}</em></h5>
 
-	<hr>
+	<!-- CANCIONES -->
+    <hr>
+    <h5> Canciones </h5>
+    <div class="container" *ngIf="songs && songs.length > 0">
+        <div class="col xl8 l10 m12 s12 offset-l1" >
+            
+            <table id="songs-table" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>N°</th>
+                        <th>Nombre</th>
+                        <th>Artista</th>
+                        <th class="center-align">Duración</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody id="songs-id" *ngFor="let song of songs | filter:termi; let i = index">
+                    <tr>
+                        <td class="button_play">
+                            <a (click)="startPlayer(song)">
+                                <mat-icon>play_arrow</mat-icon>
+                            </a>
+                        </td>
+                        <td>{{ i+1 }}</td>
+                        <td>{{ song.name }}</td>
+                        <td>{{ song.album.artist.name }}</td>
+                        <td class="center-align">{{ song.duration }}</td>
+                        <td style="width: 40px">
+                            <button mat-mini-fab [matMenuTriggerFor]="menu" 
+                            class="transparent z-depth-0">
+                                <mat-icon>more_horiz</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                
+                                <button mat-menu-item [routerLink]="['/editar-cancion', song._id]">
+                                    Editar canción
+                                </button>
+                                <button mat-menu-item [matMenuTriggerFor]="playlistsMenu" >
+                                    Agregar a playlist
+                                </button>                                    
+                                <mat-menu #playlistsMenu="matMenu">
+                                    <button mat-menu-item *ngFor="let playlist of playlists"
+                                    (click)="addSongToPlaylist(playlist._id, song)">
+                                        {{ playlist.title }}
+                                    </button>
+                                </mat-menu>
+
+                            </mat-menu>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h6 class="grey-text" id="empty-songs" hidden>
+                <em>No hay más canciones para esta búsqueda</em>
+            </h6> 
+
+        </div>
+    </div>
+        
 
 	<!-- ARTISTAS -->
-	<div *ngIf="artists" class="row albums-row">
-		<h5> Artistas </h5>
-		<div class="col xl2 l3 m4 s6" *ngFor="let artist of artists | filter:termi;" >
+    <hr>
+	<h5> Artistas </h5>
+    <div *ngIf="artists" class="row albums-row">
+		
+		<div id="artists-id" class="col xl2 l3 m4 s6" *ngFor="let artist of artists | filter:termi;" >
 	        
 	        <div class="card" >
 	            <div class="card-image">
@@ -31,22 +95,27 @@
 	                
 	            </div>
 	        </div>
-
 	    </div>
+
+        <h6 class="grey-text" id="empty-artists" hidden>
+            <em>No hay más artistas para esta búsqueda</em>
+        </h6>  
+
 	</div>
 
-	<hr>
 
 	<!-- ALBUMS -->
+    <hr>
+    <h5 style="padding-bottom: 25px;"> Álbums </h5>
 	<div *ngIf="albums" class="row albums-row">
-		<h5> Álbums </h5>
-		<br><br>
-    	<div class="col xl2 l3 m4 s6" *ngFor="let album of albums | filter:termi;" >
+		
+    	<div id="albums-id" class="col xl2 l3 m4 s6" *ngFor="let album of albums | filter:termi" >
             
             <div class="card album-list" >
                 <div class="card-image">
                     <img *ngIf="album.image != 'null'" class="image-artist" src="{{url + 'get-image-album/' + album.image}}">
-                    <button class="flotante z-depth-0" mat-mini-fab matTooltip="reproducir álbum">
+                    <button class="flotante z-depth-0" mat-mini-fab matTooltip="reproducir álbum"
+                    (click)="getAndPlayAlbum(album._id)">
                         <mat-icon>play_arrow</mat-icon>
                     </button>
                 </div>
@@ -82,7 +151,13 @@
             </div>
 
         </div>
+
+        <h6 class="grey-text" id="empty-albums" hidden>
+            <em>No hay más álbums para esta búsqueda</em>
+        </h6>         
+
     </div>
-	
+    
+    
 
 </div>

@@ -19,12 +19,16 @@
 html {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
+  background: url('../img/wall1.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 body {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  background-color: $background-color-dark;
 }
 
 a, input, h3, h4, h5, textarea {
@@ -38,7 +42,28 @@ header, main, footer {
   font-weight: 400;
 }
 
+.home-page {
+  padding-bottom: 160px;
+  .home-title {
+    text-shadow: 0px 0px 35px black;
+    font-weight: 800;
+    margin-top: 20px;
+  }
+  button {
+    font-size: 30px; 
+    padding: 18px 35px 18px 35px;
+    border-radius: 2px;
+    font-weight: 300;
+    margin: 15px;
+  }
+  img {
+    margin-top: 25px;
+  }
+}
+
 .componente-principal-actual {
+  padding-top: 1px;
+  background-color: rgba(16, 16, 16, 0.92);
   padding-bottom: 230px;
   padding-left: 5px;
   hr {
@@ -127,6 +152,9 @@ button.mat-mini-fab.mat-accent {
     .col {
       display: inline-block;
       float: none;
+    }
+    #empty-albums {
+      margin-top: -22px;
     }
   }
    &.playlists-row {

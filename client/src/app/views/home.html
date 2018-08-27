@@ -1,7 +1,23 @@
-<div class="componente-principal-actual">
-  <div class="row">
-    
-    <h2> Bienvenido a listen! </h2>
+<div class="home-page">
+	
+	  <div class="row center-align">
+	    
+	    <img src="../assets/img/music-playerx64.png">
+	    <h1 class="home-title" > 
+	    	Bienvenido a Listen! 
+	    </h1>
+	    
+	    <br>
 
-  </div>
+	    <h5>Empieza a escuchar la música que te gusta</h5>
+	    
+	    <button [routerLink]="['/artistas', 1]" mat-stroked-button class="transparent" >
+	   		Artistas
+	    </button>
+	    <button [routerLink]="['/playlists/', identity._id]" mat-stroked-button class="transparent">
+	   		Playlists
+	    </button>
+
+	  </div>
+	
 </div>

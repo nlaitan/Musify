@@ -15,6 +15,10 @@
                 <div class="card-image">
                     <img *ngIf="playlist.image != 'null'" class="image-artist" src="{{url + 'get-image-playlist/' + playlist.image}}">
                     <img *ngIf="playlist.image == 'null'" class="image-artist default" src="../assets/img/album-whitex64.png"/>
+                    <button class="flotante z-depth-0" mat-mini-fab 
+                    (click)="getAndPlayPlaylist(playlist._id)" matTooltip="reproducir álbum">
+                        <mat-icon>play_arrow</mat-icon>
+                    </button>
                 </div>
                 <div class="card-content center-align">
                     <span class="card-title">

@@ -1,24 +1,19 @@
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../services/user.service';
-import { AlbumService } from '../services/album.service';
 import { GLOBAL } from '../services/global';
 import { Album } from '../models/album';
-import { SongService } from '../services/song.service';
 
-export interface IMedia {
-    id: string;
-    name: string;
-    artist: string;
-    src: string;
-    type: string;
-}
+import { AlbumService } from '../services/album.service';
+import { SongService } from '../services/song.service';
+import { PlayerService } from '../services/player.service';
+
 
 @Component({
 	selector: 'album-list',
 	templateUrl: '../views/album-list.html',
 	providers: [ 
-		UserService, AlbumService, SongService 
+		UserService, AlbumService, SongService, PlayerService
 	]
 })
 
@@ -39,7 +34,8 @@ export class AlbumListComponent implements OnInit {
 		private _router: Router,
 		private _userService: UserService,
 		private _albumService: AlbumService,
-		private _songService: SongService
+		private _songService: SongService,
+		private _playerService: PlayerService
 	){
 		this.titulo = 'Álbums',
 		this.identity = this._userService.getIdentity();
@@ -98,7 +94,7 @@ export class AlbumListComponent implements OnInit {
 						console.log('Este album no tiene canciones');
 					} else {
 						var songs = response['entityName'];
-						this.playAlbum(songs);
+						this._playerService.addAlbumToQueue(songs);
 					}
 				},
 				error => {
@@ -108,48 +104,6 @@ export class AlbumListComponent implements OnInit {
 	            }
 			);
 		});
-	}
-
-	playAlbum(songs){
-		localStorage.setItem('queue', JSON.stringify([]));
-		localStorage.setItem('newQueue', 'true');
-		for (var i = 0; i < songs.length; ++i) {
-			this.addToQueue(songs[i]);
-		}
-		this.basicStartPlayer(songs[0]);
-	}
-
-	basicStartPlayer(song){
-		let song_player = JSON.stringify(song);
-		let file_path = this.url + 'get-song-file/' + song.file;
-		let image_path = this.url + 'get-image-album/' + song.album.image;
-		
-		localStorage.setItem('sound_song', song_player );
-		document.getElementById("audio_source").setAttribute("src", file_path);
-		(document.getElementById("myAudio") as any).load();
-		(document.getElementById("myAudio") as any).play();
-
-		document.getElementById("song-title").innerHTML = (song.album.artist.name + ' - ' + song.name);
-		document.getElementById("play-image-album").setAttribute("src", image_path);
-
-	}
-
-	addToQueue(song){
-		let file_path = this.url + 'get-song-file/' + song.file;
-		var song_play : IMedia = ({
-            id: song._id,
-            name: song.name,
-            artist: song.album.artist.name,
-            src: file_path,
-            type: 'audio/mpeg'
-        });
-		//console.log(song_play);
-        var subQueue = JSON.parse(localStorage.getItem("queue"));
-        if(!subQueue) {
-        	subQueue = [];
-        }
-    	subQueue.push(song_play);
-    	localStorage.setItem('queue', JSON.stringify(subQueue));
 	}
 
 	onDeleteConfirm(id){

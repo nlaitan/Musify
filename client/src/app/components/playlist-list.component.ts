@@ -4,11 +4,12 @@ import { UserService } from '../services/user.service';
 import { GLOBAL } from '../services/global';
 import { Playlist } from '../models/playlist';
 import { PlaylistService } from '../services/playlist.service';
+import { PlayerService } from '../services/player.service';
 
 @Component({
 	selector: 'playlist-list',
 	templateUrl: '../views/playlist-list.html',
-	providers: [ UserService, PlaylistService ]
+	providers: [ UserService, PlaylistService, PlayerService ]
 })
 
 export class PlaylistListComponent implements OnInit {
@@ -26,7 +27,8 @@ export class PlaylistListComponent implements OnInit {
 		private _route: ActivatedRoute,
 		private _router: Router,
 		private _userService: UserService,
-		private _playlistService: PlaylistService
+		private _playlistService: PlaylistService,
+		private _playerService: PlayerService
 	){
 		this.titulo = 'Playlists',
 		this.identity = this._userService.getIdentity();
@@ -87,6 +89,23 @@ export class PlaylistListComponent implements OnInit {
                 }
             }
 		);
+	}
+
+	getAndPlayPlaylist(playlist_id){
+		this._route.params.forEach((params: Params) => {
+			this._playlistService.getPlaylist(this.token, playlist_id).subscribe(
+				response => {
+					!response['playlist'] ? 
+						console.log('no hay playlist') :
+						this._playerService.addAlbumToQueue(response['playlist'].songs);
+				},
+				error => {
+	                if(error != null){
+	                    console.log(error.error.message);
+	                }
+	            }
+			);
+		});
 	}
 
 }

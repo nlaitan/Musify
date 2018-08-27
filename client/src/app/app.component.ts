@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
 import { GLOBAL } from './services/global';
-import { Router, ActivatedRoute, Params} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-//import { Http } from '@angular/http';
 import  { MatSnackBar } from '@angular/material';
 declare let $: any;
 import { trigger } from '@angular/animations';
+
+//import { LoadingModule } from '@angular/core';
 
 @Component({
   selector: 'app-root',

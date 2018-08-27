@@ -1,30 +1,23 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../services/user.service';
+import { GLOBAL } from '../services/global';
+import { AppComponent } from '../app.component';
+
 import { AlbumService } from '../services/album.service';
 import { SongService } from '../services/song.service';
 import { PlaylistService } from '../services/playlist.service';
-import { GLOBAL } from '../services/global';
-import { AppComponent } from '../app.component';
-import { PlayerComponent } from './player.component';
-//import { Artist } from '../models/artist';
+import { PlayerService } from '../services/player.service';
+
 import { Album } from '../models/album';
 import { Song } from '../models/song';
 import { Playlist } from '../models/playlist';
 
 
-export interface IMedia {
-    id: string;
-    name: string;
-    artist: string;
-    src: string;
-    type: string;
-}
-
 @Component({
 	selector: 'album-detail',
 	templateUrl: '../views/album-detail.html',
-	providers: [ UserService, AlbumService, SongService, PlaylistService, PlayerComponent ]
+	providers: [ UserService, AlbumService, SongService, PlaylistService, PlayerService ]
 })
 
 export class AlbumDetailComponent implements OnInit {
@@ -45,8 +38,9 @@ export class AlbumDetailComponent implements OnInit {
 		private _albumService: AlbumService,
 		private _songService: SongService,
 		private _playlistService: PlaylistService,
-        public app: AppComponent,
-        public player: PlayerComponent
+		private _playerService: PlayerService,
+        public app: AppComponent
+        //public player: PlayerComponent
 	){
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
@@ -123,51 +117,12 @@ export class AlbumDetailComponent implements OnInit {
 		);
 	}
 
-	addToQueue(song){
-		let file_path = this.url + 'get-song-file/' + song.file;
-		var song_play : IMedia = ({
-            id: song._id,
-            name: song.name,
-            artist: song.album.artist.name,
-            src: file_path,
-            type: 'audio/mpeg'
-        });
-
-        var subQueue = JSON.parse(localStorage.getItem("queue"));
-        if(!subQueue) {
-        	subQueue = [];
-        }
-    	subQueue.push(song_play);
-    	localStorage.setItem('queue', JSON.stringify(subQueue));
-	}
-
 	addAlbumToQueue(){
-    	localStorage.setItem('queue', JSON.stringify([]));
-    	localStorage.setItem('newQueue', 'true');
-		for (var i = 0; i < this.songs.length; ++i) {
-			this.addToQueue(this.songs[i]);
-		}
-		this.basicStartPlayer(this.songs[0]);
+    	this._playerService.addAlbumToQueue(this.songs);
 	}
 
 	startPlayer(song){
-		this.basicStartPlayer(song);
-		this.addToQueue(song);
-	}
-
-	basicStartPlayer(song){
-		let song_player = JSON.stringify(song);
-		let file_path = this.url + 'get-song-file/' + song.file;
-		let image_path = this.url + 'get-image-album/' + song.album.image;
-		
-		localStorage.setItem('sound_song', song_player );
-		document.getElementById("audio_source").setAttribute("src", file_path);
-		(document.getElementById("myAudio") as any).load();
-		(document.getElementById("myAudio") as any).play();
-
-		document.getElementById("song-title").innerHTML = (song.album.artist.name + ' - ' + song.name);
-		document.getElementById("play-image-album").setAttribute("src", image_path);
-
+		this._playerService.startPlayer(song);
 	}
 
 	getPlaylists(){

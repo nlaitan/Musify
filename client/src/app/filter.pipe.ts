@@ -17,25 +17,26 @@ export class FilterPipe implements PipeTransform {
         return (
           entity.name.toLowerCase().includes(term.toLowerCase()) ||
           entity.description.toLowerCase().includes(term.toLowerCase())
-        );
+        )
       } else {
         if(entities[0].title && entities[0].description) {
           return (
             entity.title.toLowerCase().includes(term.toLowerCase()) ||
             entity.description.toLowerCase().includes(term.toLowerCase()) ||
             entity.artist.name.toLowerCase().includes(term.toLowerCase())
-          );
+          )
         } else {
           if(entities[0].file) {
             return ( 
               entity.name.toLowerCase().includes(term.toLowerCase()) ||
               entity.album.artist.name.toLowerCase().includes(term.toLowerCase())
-            );
+            )
           }
         }
       }
+      console.log(entities);
 
-    }
+    })
   }
 
 }

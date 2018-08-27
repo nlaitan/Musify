@@ -6,17 +6,20 @@ import { GLOBAL } from '../services/global';
 import { Song } from '../models/song';
 import { Album } from '../models/album';
 import { Artist } from '../models/artist';
+import { Playlist } from '../models/playlist';
 
 import { SongService } from '../services/song.service';
 import { AlbumService } from '../services/album.service';
 import { ArtistService } from '../services/artist.service';
+import { PlaylistService } from '../services/playlist.service';
+import { PlayerService } from '../services/player.service';
 
 
 @Component({
 	selector: 'search',
 	templateUrl: '../views/search.html',
 	providers: [ 
-		UserService, SongService, AlbumService, ArtistService
+		UserService, SongService, AlbumService, ArtistService, PlayerService, PlaylistService
 	]
 })
 
@@ -32,6 +35,7 @@ export class SearchComponent implements OnInit {
 	public songs: Song[];
 	public albums: Album[];
 	public artists: Artist[];
+	public playlists: Playlist[];
 	
 
 	constructor(
@@ -40,7 +44,9 @@ export class SearchComponent implements OnInit {
 		private _userService: UserService,
 		private _songService: SongService,
 		private _albumService: AlbumService,
-		private _artistService: ArtistService
+		private _artistService: ArtistService,
+		private _playlistService: PlaylistService,
+		private _playerService: PlayerService
 		
 	){
 		this.titulo = 'Búsqueda',
@@ -59,12 +65,31 @@ export class SearchComponent implements OnInit {
 		this.getSongs();
 		this.getAlbums();
 		this.getArtists();
+		this.getPlaylists();
 
 	}
 
 
 	getSongs(){
-
+				
+		this._route.params.forEach((params: Params) => {	
+			this._songService.getSongs(this.token).subscribe(
+				response => {
+					if(!response['entityName']){
+						console.log('Este album no tiene canciones');
+					} else {
+						this.songs = response['entityName'];
+						console.log(this.songs);
+					}
+				},
+				error => {
+	                if(error != null){
+	                    console.log(error.error.message);
+	                }
+	            }
+			)						
+		})
+	
 	}
 
 	getAlbums(){
@@ -134,6 +159,86 @@ export class SearchComponent implements OnInit {
 
 	changeTerm(event){
 		this.termi = document.getElementById('term-search').getAttribute('value');
+
+		(document.getElementById('albums-id')) ?
+			document.getElementById('empty-albums').setAttribute('hidden', '') :
+			document.getElementById('empty-albums').removeAttribute('hidden');
+
+		(document.getElementById('artists-id')) ?
+			document.getElementById('empty-artists').setAttribute('hidden', '') :
+			document.getElementById('empty-artists').removeAttribute('hidden');
+
+		if (document.getElementById('songs-id')) { 
+			document.getElementById('empty-songs').setAttribute('hidden', '');
+			document.getElementById('songs-table').removeAttribute('hidden')
+		} else {
+			document.getElementById('empty-songs').removeAttribute('hidden');
+			document.getElementById('songs-table').setAttribute('hidden', '');
+		}
+	}
+
+	addAlbumToQueue(songs){
+		this._playerService.addAlbumToQueue(songs);
+	}
+
+	startPlayer(song){
+		this._playerService.startPlayer(song);
+	}
+
+	addSongToPlaylist(playlist_id, song){
+
+		this._playlistService.addSong(this.token, song, playlist_id).subscribe(
+			response => {
+				this.getPlaylists();
+			},
+			error => {
+                if(error != null){
+                    console.log(error);
+                }
+            }
+		);
+	
+	}
+
+	getPlaylists(){
+		this._route.params.forEach((params: Params) => {
+			var myId = this.identity._id;
+			this._playlistService.getPlaylists(this.token, myId).subscribe(
+				response => {
+					if(!response['entityName']) {
+						console.log('No hay playlists');
+					} else {
+						this.playlists = response['entityName'];
+					}
+				},
+				error => {
+	                if(error != null){
+	                    console.log(error.error.message);
+	                }
+	            }
+			); 
+
+		});
+	}
+
+	getAndPlayAlbum(album_id){
+		this._route.params.forEach((params: Params) => {		
+			this._songService.getSongs(this.token, album_id).subscribe(
+				response => {
+					if(!response['entityName']){
+						console.log('Este album no tiene canciones');
+					} else {
+						var songs = response['entityName'];
+						this._playerService.addAlbumToQueue(songs);
+					}
+				},
+				error => {
+	                if(error != null){
+	                    console.log(error.error.message);
+	                }
+	            }
+			);
+		});
 	}
 
 }
